@@ -1,0 +1,44 @@
+@CHARSET "ISO-8859-1";
+
+#button_cate, #button_lieu{
+	border:solid;
+	border-style: solid;
+	border-color: #EEEEEE;
+	vertical-align: center;
+	margin-top: 15px;
+}
+
+#button_deco{
+	border:solid;
+	border-style: solid;
+	border-color: #EEEEEE;
+	vertical-align: center;
+	margin-top: 15px;
+	text-align: right;
+	float: right;
+}
+
+#logo{
+	background-color: #8800FF;
+	padding: 15px;
+}
+
+#content{
+	margin-top: 25px;
+}
+
+#user_content{
+	width: 150px;
+	height: 320px;
+	border: 2px solid;
+	border-color: #cdcdcd;
+	padding: 5px;
+	background-color: #f0f0f0;
+}
+
+body{
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 10 px;
+	margin-bottom: 10px;
+}
