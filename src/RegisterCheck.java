@@ -59,7 +59,7 @@ public class RegisterCheck extends HttpServlet {
 				
 			
 				if (pass1 == pass2) {
-					break;
+					
 					
 				}
 				
