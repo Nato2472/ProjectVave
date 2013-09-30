@@ -15,11 +15,11 @@
                     <label for="prenom">Votre prénom :</label>
                     <input type="text" name="prenom" id="prenom" required="true"><br>
                     
-                    <label for="login" title="Le login est utilisé pour la connexion au site, il est strictement personnel.">Votre login :</label>
-                    <input type="text" name="login" id="login" required="true"><br>
-                    
                     <label for="pseudo" title="Le pseudo sera visible par tout utilisateur du site.">Votre pseudo :</label>
                     <input type="text" name="pseudo" id="pseudo" required="true"><br>
+                   
+                    <label for="login" title="Le login est utilisé pour la connexion au site, il est strictement personnel.">Votre login :</label>
+                    <input type="text" name="login" id="login" required="true"><br>
                     
                     <label for="password">Mot de passe:</label>
                     <input type="password" id="password" name="password" required="true"><br>
@@ -27,7 +27,7 @@
                     <input type="password" id="password2" name="password2" required="true"><br>
                     
                     <br>
-                    <input type="submit" value="Login ">
+                    <input type="submit" value="S'incrire">
                 </form>
             </fieldset>
             
