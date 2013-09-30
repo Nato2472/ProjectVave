@@ -21,9 +21,9 @@
 				<img/>
 			</div>
 			<span id="menu_button">
-				<button id="button_cate">Catégorie</button>
-				<button id="button_lieu">Lieu</button>
-				<button id="button_deco">Deconnexion</button>
+				<input id="button_cate" type="button" value="Catégorie" onclick="self.location.href='Categorie.jsp'"/>
+				<input id="button_lieu" type="button" value="Lieu" onclick="self.location.href='index.html'"/>
+				<input id="button_deco" type="button" value="Déconnexion" onclick="self.location.href='index.html'"/>
 				
 			</span>
 			<div id="content">
@@ -46,7 +46,10 @@
 					</br>
 					<%= u.getLogin() %>
 					</br></br>
-					<a><i>Editer mes informations.</i></a>
+					<a href="Acceuil.jsp"><i>Editer mes informations.</i></a>
+				</section>
+				
+				<section id="eval_content">
 				</section>
 			</div>
 			
