@@ -1,0 +1,10 @@
+<<<<<<< HEAD
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+=======
+*.jar
+>>>>>>> Vave/master

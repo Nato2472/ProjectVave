@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    
-<%@page import="Servlet.Authentification" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -11,7 +9,7 @@
 </head>
 <body>
 	<fieldset>
-              <form action="Authentification" method="post">
+              <form action="Auth" method="post">
                   <label for="nom">Votre nom :</label>
                   <input type="text" name="nom" id="nom" required="true"><br>
                   <label for="prenom">Votre prénom :</label>
