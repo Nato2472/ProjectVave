@@ -25,9 +25,9 @@
 				<input id="button_lieu" type="button" value="Lieu" onclick="self.location.href='index.html'"/>
 				<% if(session.getAttribute("login") == null){ %>
 					<input id="button_deco" type="button" value="Connexion" onclick="self.location.href='Login.jsp'"/>
-					<input id="button_ins" type="button" value="Inscription" onclick="self.location.href = 'Register.jsp'"/>
+					<input id="button_ins" type="button" value="Inscription" onclick="self.location.href = 'register.jsp'"/>
 				<% } else{ %>
-					<input id="button_deco" type="button" value="Déconnexion" onclick="self.location.href='Logout.jsp'"/>
+					<input id="button_deco" type="button" value="Déconnexion" onclick="self.location.href='Logout.java'"/>
 					<div id="msg_co">Bonjour <%= session.getAttribute("login") %></div>
 				<% }%>
 				

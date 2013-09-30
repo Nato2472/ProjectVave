@@ -11,7 +11,7 @@
 </head>
 <body>
 	<fieldset>
-              <form action="Authentification" method="post">
+              <form action="RegisterCheck" method="post">
                   <label for="nom">Votre nom :</label>
                   <input type="text" name="nom" id="nom" required="true"><br>
                   <label for="prenom">Votre prénom :</label>

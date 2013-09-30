@@ -85,7 +85,7 @@ public class Auth extends HttpServlet {
 			} else if (rsLog == null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("error", "1");
-				getServletContext().getRequestDispatcher("/Accueil.jsp").forward(
+				getServletContext().getRequestDispatcher("/Login.jsp").forward(
 						request, response);
 			}
 
