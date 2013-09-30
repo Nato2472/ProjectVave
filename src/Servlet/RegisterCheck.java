@@ -2,7 +2,9 @@ package Servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -62,47 +64,70 @@ public class RegisterCheck extends HttpServlet {
 
 		if (pass1 == pass2) {
 
-		}
+			// Vérification IDs dans BDD
+			String url = "jdbc:jtds:sqlserver://217.128.202.143:1433/Vave";
+			String BDDuser = "sa";
+			String BDDpassword = "Mobile2013";
 
-		///////////////////////////////////////////////
-		///////// Vérification IDs dans BDD ///////////
-		///////////////////////////////////////////////
-		String url = "jdbc:jtds:sqlserver://217.128.202.143:1433/Vave";
-		String BDDuser = "sa";
-		String BDDpassword = "Mobile2013";
+			Connection connexion = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				Class.forName("net.sourceforge.jtds.jdbc.Driver");
 
-		Connection connexion = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		
-		
-		try {
-			Class.forName("net.sourceforge.jtds.jdbc.Driver");
+				connexion = DriverManager.getConnection(url, BDDuser, BDDpassword);
 
-			connexion = DriverManager.getConnection(url, BDDuser, BDDpassword);
-
-		} catch (ClassNotFoundException ex) {
-			System.err.println("Impossible de trouver le driver");
-			System.exit(-1);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			stmt = connexion.createStatement();
-			rs = stmt.executeQuery("SELECT count(Login_Uti) FROM UTILISATEUR WHERE Login_Uti = '" + login + "' AND Pse_Uti ='" + pseudo + "';");
-			String rsLog = null;
-			if (rs.next()) {
-				rsLog = rs.getObject(1).toString();
+			} catch (ClassNotFoundException ex) {
+				System.err.println("Impossible de trouver le driver");
+				System.exit(-1);
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
+			
+			try {
+				pstmt = connexion.prepareStatement("SELECT count(Login_Uti) FROM UTILISATEUR WHERE Login_Uti = ? AND Pseudo_Uti = ?");
+				pstmt.setObject(1, login);
+				pstmt.setObject(2, pseudo);
+				
+				
+				rs = pstmt.executeQuery();
+				String rsRes = null;
+				if (rs.next()) {
+					rsRes = rs.getObject(1).toString();
+				}
+				System.out.println("Résultat du ResultSet : " + rsRes);
+				
+				if ( rsRes != "0") { // Si il y a aucune correspondance en BDD, j'inscris l'utilisateur.
+					pstmt = connexion.prepareStatement("INSERT INTO UTILISATEUR (Login_Uti, Prenom_Uti, Nom_Uti, Pseudo_Uti, Mdp_Uti, Date_Inscrip_Uti) VALUES (?, ?, ?, ?, ?, ?)");
+					pstmt.setObject(1, login);
+					pstmt.setObject(2, firstname);
+					pstmt.setObject(3, lastname);
+					pstmt.setObject(4, pseudo);
+					pstmt.setObject(5, pass1);
+					// pstmt.setObject(6, Date); date actuelle
+					
+					
+					rs = pstmt.executeQuery();
+				}
 
-			System.out.println("Login depuis la BDD : " + rsLog);
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+		} else {
+			// les mots de passe de ne sont pas identiques.
 		}
-
 	}
-
+	
+	
+	public boolean isAlpha(String name) {
+	    return name.matches("[a-zA-Z]+");
+	}
+	
 }
+
+
