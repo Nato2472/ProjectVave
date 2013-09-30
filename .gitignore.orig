@@ -1,10 +1,12 @@
-<<<<<<< HEAD
 *.class
 
 # Package Files #
 *.jar
+<<<<<<< HEAD
 *.war
 *.ear
 =======
-*.jar
->>>>>>> Vave/master
+/build
+
+.classpath
+>>>>>>> Vave/Dev

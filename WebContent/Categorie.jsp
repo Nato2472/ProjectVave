@@ -13,7 +13,7 @@
 				<img/>
 			</div>
 			<span id="menu_button">
-				<input id="button_cate" type="button" value="Acceuil" onclick="self.location.href='Acceuil.jsp'"/>
+				<input id="button_cate" type="button" value="Accueil" onclick="self.location.href='Accueil.jsp'"/>
 				<input id="button_lieu" type="button" value="Lieu" onclick="self.location.href='index.html'"/>
 				<input id="button_deco" type="button" value="Déconnexion" onclick="self.location.href='index.html'"/>
 				
