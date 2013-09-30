@@ -12,8 +12,8 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<link rel="stylesheet" type="text/css" href="Acceuil.css"/>
-		<title>Acceuil</title>
+		<link rel="stylesheet" type="text/css" href="Accueil.css"/>
+		<title>Accueil</title>
 	</head>
 	<body>
 		<header>
@@ -23,7 +23,14 @@
 			<span id="menu_button">
 				<input id="button_cate" type="button" value="Catégorie" onclick="self.location.href='Categorie.jsp'"/>
 				<input id="button_lieu" type="button" value="Lieu" onclick="self.location.href='index.html'"/>
-				<input id="button_deco" type="button" value="Déconnexion" onclick="self.location.href='index.html'"/>
+				<% if(session.getAttribute("login") == null){ %>
+					<input id="button_deco" type="button" value="Connexion" onclick="self.location.href='Login.jsp'"/>
+					<input id="button_ins" type="button" value="Inscription" onclick="self.location.href = 'Register.jsp'"/>
+				<% } else{ %>
+					<input id="button_deco" type="button" value="Déconnexion" onclick="self.location.href='Logout.jsp'"/>
+					<div id="msg_co">Bonjour <%= session.getAttribute("login") %></div>
+				<% }%>
+				
 				
 			</span>
 			<div id="content">

@@ -8,7 +8,13 @@
 	margin-top: 15px;
 }
 
-#button_deco{
+#msg_co{
+	margin-top: 15px;
+	text-align: right;
+	float: right;
+}
+
+#button_deco, #button_ins{
 	border:solid;
 	border-style: solid;
 	border-color: #EEEEEE;

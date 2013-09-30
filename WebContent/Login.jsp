@@ -12,25 +12,24 @@
 		<%
             if (session.getAttribute("login") == null) {
         %>
-            <fieldset>
-                <form action="Authentification" method="post">
-                    <label for="login">Nom utilisateur:</label>
-                    <input type="text" name="login" id="login" required="true"><br>
-                    <label for="password">Mot de passe:</label>
-                    <input type="password" id="password" name="password" required="true"><br><br>
-                    <input type="submit" value="Login ">
-                </form>
-            </fieldset>
-            
-            <a href="register.jsp">Pas encore inscrit ? C'est ici !</a>
+	            <fieldset>
+	                <form action="Auth" method="post">
+	                    <label for="login">Nom utilisateur:</label>
+	                    <input type="text" name="login" id="login" required="true"><br>
+	                    <label for="password">Mot de passe:</label>
+	                    <input type="password" id="password" name="password" required="true"><br><br>
+	                    <input type="submit" value="Login ">
+	                </form>
+	            </fieldset>
+	            
+	            <a href="Register.jsp">Pas encore inscrit ? C'est ici !</a>
  
-            <% if (session.getAttribute("error") == "1") {
-            	%><FONT color="red">Mauvais identifiant ou mot de passe !</FONT><%
-            }
-            	} else {%>
-            <h3><a href="Logout">Déconnexion</a><br></h3>
-            <h3> Every body say "Hellloo <%= session.getAttribute("login")%> ".</h3>
- 
+	            <% if (session.getAttribute("error") == "1") {
+	            	%><FONT color="red">Mauvais identifiant ou mot de passe !</FONT><%
+	            }
+           	} else {%>
+             	<%
+             	request.getRequestDispatcher("Acceuil.jsp"); %> 
             <%}%>
 
 </body>
