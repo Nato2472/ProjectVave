@@ -24,7 +24,7 @@
 			</div>
 			<span id="menu_button">
 				<input id="button_cate" type="button" value="Catégorie" onclick="self.location.href='Categorie.jsp'"/>
-				<input id="button_lieu" type="button" value="Lieu" onclick="self.location.href='index.html'"/>
+				<input id="button_lieu" type="button" value="Lieu" onclick="self.location.href='Error.html'"/>
 				<% if(session.getAttribute("login") == null){ %>
 					<input id="button_deco" type="button" value="Connexion" onclick="self.location.href='Login.jsp'"/>
 					<input id="button_ins" type="button" value="Inscription" onclick="self.location.href = 'register.jsp'"/>
