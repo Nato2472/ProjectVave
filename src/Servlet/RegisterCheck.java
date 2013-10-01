@@ -93,22 +93,23 @@ public class RegisterCheck extends HttpServlet {
 				
 				
 				rs = pstmt.executeQuery();
-				String rsRes = null;
+				String StrRes = null;
 				if (rs.next()) {
-					rsRes = rs.getObject(1).toString();
+					StrRes = rs.getObject(1).toString();
 				}
-				System.out.println("Résultat du ResultSet : " + rsRes);
+				System.out.println("Résultat du ResultSet : " + StrRes);
 				
-				if ( rsRes.equals("0")) { // Si il y a aucune correspondance en BDD, j'inscris l'utilisateur.
+				if ( StrRes.equals("0")) { // Si il y a aucune correspondance en BDD, j'inscris l'utilisateur.
 					pstmt = connexion.prepareStatement("INSERT INTO UTILISATEUR (Login_Uti, Prenom_Uti, Nom_Uti, Pseudo_Uti, Mdp_Uti, Date_Inscrip_Uti) VALUES (?, ?, ?, ?, ?, ?)");
 					pstmt.setObject(1, login);
 					pstmt.setObject(2, firstname);
 					pstmt.setObject(3, lastname);
 					pstmt.setObject(4, pseudo);
 					pstmt.setObject(5, pass1);
-					Date d = new Date(0);
+					java.util.Date now = new java.util.Date();
+					java.sql.Date NOW = new java.sql.Date(now.getTime());
 					
-					pstmt.setDate(6, d); // date actuelle
+					pstmt.setDate(6, NOW); // date actuelle
 					
 					System.out.println("Execution de la requete.");
 					pstmt.executeUpdate();
