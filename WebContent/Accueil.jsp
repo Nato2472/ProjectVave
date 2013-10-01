@@ -3,6 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page import="Model.User" %>
+<%@page import="Servlet.Logout" %>
+
 <%
 	// serveur IP: 217.128.202.143
 	//User u = (User) request.getAttribute("User");
@@ -27,11 +29,11 @@
 					<input id="button_deco" type="button" value="Connexion" onclick="self.location.href='Login.jsp'"/>
 					<input id="button_ins" type="button" value="Inscription" onclick="self.location.href = 'register.jsp'"/>
 				<% } else{ %>
-					<input id="button_deco" type="button" value="Déconnexion" onclick="self.location.href='Logout.java'"/>
-					<div id="msg_co">Bonjour <%= session.getAttribute("login") %></div>
+					<input id="button_deco" type="submit" value="Déconnexion" onclick="self.location.href = 'Logout'"/>
+					<div id="msg_co">
+						Bonjour <%= session.getAttribute("login") %>
+					</div>
 				<% }%>
-				
-				
 			</span>
 			<div id="content">
 				<section id="user_content">
@@ -58,12 +60,10 @@
 				
 				<section id="eval_content">
 				</section>
-			</div>
-			
+			</div>		
 		</header>
 		<section>
 			
-		</section>
-		
+		</section>	
 	</body>
 </html>
