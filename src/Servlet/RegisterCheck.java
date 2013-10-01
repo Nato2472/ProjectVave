@@ -2,6 +2,7 @@ package Servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
+
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -54,6 +55,7 @@ public class RegisterCheck extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
+		System.out.println("Dans le doPost");
 		// je recupère Login et Password entré par l'utilisateur
 		String lastname = request.getParameter("nom");
 		String firstname = request.getParameter("prenom");
@@ -62,7 +64,7 @@ public class RegisterCheck extends HttpServlet {
 		String pass1 = request.getParameter("password");
 		String pass2 = request.getParameter("password2");
 
-		if (pass1 == pass2) {
+		if (pass1.equals(pass2)) {
 
 			// Vérification IDs dans BDD
 			String url = "jdbc:jtds:sqlserver://217.128.202.143:1433/Vave";
@@ -80,7 +82,6 @@ public class RegisterCheck extends HttpServlet {
 
 			} catch (ClassNotFoundException ex) {
 				System.err.println("Impossible de trouver le driver");
-				System.exit(-1);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -98,29 +99,47 @@ public class RegisterCheck extends HttpServlet {
 				}
 				System.out.println("Résultat du ResultSet : " + rsRes);
 				
-				if ( rsRes != "0") { // Si il y a aucune correspondance en BDD, j'inscris l'utilisateur.
+				if ( rsRes.equals("0")) { // Si il y a aucune correspondance en BDD, j'inscris l'utilisateur.
 					pstmt = connexion.prepareStatement("INSERT INTO UTILISATEUR (Login_Uti, Prenom_Uti, Nom_Uti, Pseudo_Uti, Mdp_Uti, Date_Inscrip_Uti) VALUES (?, ?, ?, ?, ?, ?)");
 					pstmt.setObject(1, login);
 					pstmt.setObject(2, firstname);
 					pstmt.setObject(3, lastname);
 					pstmt.setObject(4, pseudo);
 					pstmt.setObject(5, pass1);
-					// pstmt.setObject(6, Date); date actuelle
+					Date d = new Date(0);
 					
+					pstmt.setDate(6, d); // date actuelle
 					
-					rs = pstmt.executeQuery();
+					System.out.println("Execution de la requete.");
+					pstmt.executeUpdate();
+					System.out.println("Fin de l'inscription");
+				} else {
+					// les mots de passe de ne sont pas identiques.
+					System.out.println("Cet utilisateur existe déjà.");
 				}
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} finally {
+				try {
+					if (connexion != null) {
+						connexion.close();
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 			
 			
 		} else {
 			// les mots de passe de ne sont pas identiques.
+			System.out.println("Les mots de passe ne sont pas identiques");
 		}
+		
+		System.out.println("Je SOOOOORRRSSSS");
 	}
 	
 	
