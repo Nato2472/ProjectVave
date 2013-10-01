@@ -2,6 +2,11 @@
 
 # Package Files #
 *.jar
+<<<<<<< HEAD
+*.war
+*.ear
+=======
 /build
 
 .classpath
+>>>>>>> Vave/Dev

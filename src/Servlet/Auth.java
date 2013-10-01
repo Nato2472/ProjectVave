@@ -85,14 +85,12 @@ public class Auth extends HttpServlet {
 			} else if (rsLog == null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("error", "1");
-				getServletContext().getRequestDispatcher("/Accueil.jsp").forward(
+				getServletContext().getRequestDispatcher("/Login.jsp").forward(
 						request, response);
 			}
 
 		} catch (ClassNotFoundException ex) {
 			System.err.println("Impossible de trouver le driver");
-			System.exit(-1);
-			;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

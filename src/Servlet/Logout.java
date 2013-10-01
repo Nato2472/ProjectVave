@@ -42,10 +42,9 @@ public class Logout extends HttpServlet {
 			}
 			session.setAttribute("login", null);
 		}
-		getServletContext().getRequestDispatcher("/index.html").forward(
+		getServletContext().getRequestDispatcher("/Accueil.jsp").forward(
 				request, response);
 		// request.logout();
-
 	}
 
 	/**
@@ -55,6 +54,7 @@ public class Logout extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
+		
 	}
 
 }

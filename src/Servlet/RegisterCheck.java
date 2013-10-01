@@ -2,7 +2,9 @@ package Servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.servlet.ServletConfig;
@@ -11,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class RegisterCheck
@@ -61,9 +64,9 @@ public class RegisterCheck extends HttpServlet {
 
 		}
 
-		// /////////////////////////////////////////////
-		// /////// Vérification IDs dans BDD ///////////
-		// /////////////////////////////////////////////
+		///////////////////////////////////////////////
+		///////// Vérification IDs dans BDD ///////////
+		///////////////////////////////////////////////
 		String url = "jdbc:jtds:sqlserver://217.128.202.143:1433/Vave";
 		String BDDuser = "sa";
 		String BDDpassword = "Mobile2013";
@@ -71,6 +74,34 @@ public class RegisterCheck extends HttpServlet {
 		Connection connexion = null;
 		Statement stmt = null;
 		ResultSet rs = null;
+		
+		
+		try {
+			Class.forName("net.sourceforge.jtds.jdbc.Driver");
+
+			connexion = DriverManager.getConnection(url, BDDuser, BDDpassword);
+
+		} catch (ClassNotFoundException ex) {
+			System.err.println("Impossible de trouver le driver");
+			System.exit(-1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			stmt = connexion.createStatement();
+			rs = stmt.executeQuery("SELECT count(Login_Uti) FROM UTILISATEUR WHERE Login_Uti = '" + login + "' AND Pse_Uti ='" + pseudo + "';");
+			String rsLog = null;
+			if (rs.next()) {
+				rsLog = rs.getObject(1).toString();
+			}
+
+			System.out.println("Login depuis la BDD : " + rsLog);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
