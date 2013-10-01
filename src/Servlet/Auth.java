@@ -91,7 +91,6 @@ public class Auth extends HttpServlet {
 
 		} catch (ClassNotFoundException ex) {
 			System.err.println("Impossible de trouver le driver");
-			System.exit(-1);
 			;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
