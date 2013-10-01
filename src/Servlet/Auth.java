@@ -3,6 +3,7 @@ package Servlet;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -56,7 +57,7 @@ public class Auth extends HttpServlet {
 		String BDDpassword = "Mobile2013";
 
 		Connection connexion = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		
@@ -65,10 +66,11 @@ public class Auth extends HttpServlet {
 
 			connexion = DriverManager.getConnection(url, BDDuser, BDDpassword);
 
-			stmt = connexion.createStatement();
-			rs = stmt
-					.executeQuery("SELECT Login_Uti FROM UTILISATEUR WHERE Login_Uti = '"
-							+ login + "' AND Mdp_Uti='" + password + "';");
+			pstmt = connexion.prepareStatement("SELECT Login_Uti FROM UTILISATEUR WHERE Login_Uti = ? AND Mdp_Uti= ?;");
+			pstmt.setObject(1, login);
+			pstmt.setObject(2, password);
+			
+			rs = pstmt.executeQuery();
 			String rsLog = null;
 			if (rs.next()) {
 				rsLog = rs.getObject(1).toString();
@@ -91,10 +93,19 @@ public class Auth extends HttpServlet {
 
 		} catch (ClassNotFoundException ex) {
 			System.err.println("Impossible de trouver le driver");
+			;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} finally {
+			try {
+				if (connexion != null) {
+					connexion.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
-
+	}
 }

@@ -36,7 +36,7 @@
 		           </form>
 		       </fieldset>
 			            
-		       <a href="Register.jsp">Pas encore inscrit ? C'est ici !</a>
+	            <a href="register.jsp">Pas encore inscrit ? C'est ici !</a>
 		 
 		       <% if (session.getAttribute("error") == "1") { %>
 		           	<FONT color="red">Mauvais identifiant ou mot de passe !</FONT>
@@ -46,5 +46,14 @@
              	request.getRequestDispatcher("Acceuil.jsp");
             }%>
 	</div>
+ 
+	            <% if (session.getAttribute("error") == "1") {
+	            	%><FONT color="red">Mauvais identifiant ou mot de passe !</FONT><%
+	            }
+           	} else {%>
+             	<%
+             	request.getRequestDispatcher("Acceuil.jsp"); %> 
+            <%}%>
+
 </body>
 </html>
