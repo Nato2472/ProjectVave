@@ -106,21 +106,18 @@ public class RegisterCheck extends HttpServlet {
 					pstmt.setObject(3, lastname);
 					pstmt.setObject(4, pseudo);
 					pstmt.setObject(5, pass1);
+					// Creation de la date actuelle, et conversion pour la mettre dans la BDD
 					java.util.Date now = new java.util.Date();
 					java.sql.Date NOW = new java.sql.Date(now.getTime());
-					
 					pstmt.setDate(6, NOW); // date actuelle
 					
-					System.out.println("Execution de la requete.");
 					pstmt.executeUpdate();
-					System.out.println("Fin de l'inscription");
+
 				} else {
-					// les mots de passe de ne sont pas identiques.
-					System.out.println("Cet utilisateur existe déjà.");
+					System.out.println("Cet utilisateur existe déjà."); // les mots de passe de ne sont pas identiques.
 				}
 
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 				try {
@@ -139,8 +136,6 @@ public class RegisterCheck extends HttpServlet {
 			// les mots de passe de ne sont pas identiques.
 			System.out.println("Les mots de passe ne sont pas identiques");
 		}
-		
-		System.out.println("Je SOOOOORRRSSSS");
 	}
 	
 	
