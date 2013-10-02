@@ -7,6 +7,7 @@
 
 <%
 	// serveur IP: 217.128.202.143
+	// keloud@osys.fr
 	//User u = (User) request.getAttribute("User");
 	User u = new User("nom", "prenom", "login", "mdp", new Date());
 %>

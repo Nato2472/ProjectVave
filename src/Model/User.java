@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class User {
 
+	private Double id;
 	private String nom;
 	private String prenom;
 	private String pseudo;
@@ -14,6 +15,14 @@ public class User {
 	/*
 	 * Getteur & Setteur
 	 */
+	public Double getId() {
+		return id;
+	}
+
+	public void setId(Double id) {
+		this.id = id;
+	}
+
 	public String getNom() {
 		return nom;
 	}

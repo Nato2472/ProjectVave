@@ -2,7 +2,9 @@ package Model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DatabaseHelper {
 
@@ -12,7 +14,7 @@ public class DatabaseHelper {
 	private String url;
 	private String id;
 	private String mdp;
-
+	private Connection connexion = null;
 	/*
 	 * constructeur
 	 */
@@ -29,7 +31,7 @@ public class DatabaseHelper {
 	/**
 	 * Créé la connection à la base de donnée
 	 */
-	public void Connection() {
+	public void ConnectionOpen() {
 		try {
 			// chargement du driver de connection à SQLSERVER
 			Class.forName("net.sourceforge.jtds.jdbc.Driver");
@@ -39,7 +41,7 @@ public class DatabaseHelper {
 			System.exit(-1);
 		}
 
-		Connection connexion = null;
+		connexion = null;
 
 		try {
 			connexion = DriverManager.getConnection(url, id, mdp);
@@ -47,16 +49,60 @@ public class DatabaseHelper {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			if (connexion != null) {
-				try {
-					connexion.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+		} 
+	}
+		
+	/**
+	 * Ferme la connection à la base de donnée.
+	 */
+	public void ConnectionClose() {
+		if (connexion != null) {
+			try {
+				connexion.close();
+				connexion = null;
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
-
 	}
 
+	/**
+	 * Exécute une query et renvoit un resultset
+	 */
+	public ResultSet executeQuery(String query){
+		ResultSet rs = null;
+		Statement stm = null;
+		
+		this.ConnectionOpen();
+		
+		try {
+			stm = connexion.createStatement();
+			rs = stm.executeQuery(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			this.ConnectionClose();
+		}
+		return rs;
+	}
+	
+	/**
+	 * Exécute un update
+	 */
+	public void executeUpdate(String query){
+		Statement stm = null;
+		
+		this.ConnectionOpen();
+		
+		try {
+			stm = connexion.createStatement();
+			stm.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			this.ConnectionClose();
+		}
+	}
 }
