@@ -46,14 +46,5 @@
              	request.getRequestDispatcher("Acceuil.jsp");
             }%>
 	</div>
- 
-	            <% if (session.getAttribute("error") == "1") {
-	            	%><FONT color="red">Mauvais identifiant ou mot de passe !</FONT><%
-	            }
-           	} else {%>
-             	<%
-             	request.getRequestDispatcher("Acceuil.jsp"); %> 
-            <%}%>
-
 </body>
 </html>

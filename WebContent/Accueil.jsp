@@ -30,7 +30,7 @@
 					<input id="button_deco" type="button" value="Connexion" onclick="self.location.href='Login.jsp'"/>
 					<input id="button_ins" type="button" value="Inscription" onclick="self.location.href = 'register.jsp'"/>
 				<% } else{ %>
-					<input id="button_deco" type="submit" value="Déconnexion" onclick="self.location.href = 'Logout'"/>
+					<input id="button_deco" type="submit" value="Déconnexion" onclick="self.location.href = 'Logout.java'"/>
 					<div id="msg_co">
 						Bonjour <%= session.getAttribute("login") %>
 					</div>
@@ -55,8 +55,6 @@
 					<u>Login:</u>
 					</br>
 					<%= u.getLogin() %>
-					</br></br>
-					<a href="Acceuil.jsp"><i>Editer mes informations.</i></a>
 				</section>
 				
 				<section id="eval_content">
