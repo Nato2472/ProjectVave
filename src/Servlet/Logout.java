@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class Logout
  */
-@WebServlet("/Logout")
+@WebServlet("/Logout.java")
 public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -22,7 +22,6 @@ public class Logout extends HttpServlet {
 	 */
 	public Logout() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -42,7 +41,7 @@ public class Logout extends HttpServlet {
 			}
 			session.setAttribute("login", null);
 		}
-		getServletContext().getRequestDispatcher("/index.html").forward(
+		getServletContext().getRequestDispatcher("/Accueil.jsp").forward(
 				request, response);
 		// request.logout();
 

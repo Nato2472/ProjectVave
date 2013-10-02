@@ -118,6 +118,9 @@ public class RegisterCheck extends HttpServlet {
 						pstmt.setDate(6, NOW); // date actuelle
 
 						pstmt.executeUpdate();
+						
+						// Inscription reussi
+						response.sendRedirect("register.jsp?reg=ok");
 	
 					} else {
 						System.out.println("Cet utilisateur existe déjà.");
@@ -148,8 +151,7 @@ public class RegisterCheck extends HttpServlet {
 			response.sendRedirect("register.jsp?err=3car" + ValGet);
 		}
 		
-		// Inscription reussi
-		response.sendRedirect("register.jsp?reg=ok");
+		
 	}
 	
 	

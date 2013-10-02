@@ -36,13 +36,12 @@ System.out.println("err = " + request.getParameter("err"));
 		GETnom = request.getParameter("nom");
 		GETprenom = request.getParameter("prenom");
 		GETpseudo = request.getParameter("pseudo");
-		GETlogin = request.getParameter("login");
-		
-		
-		if (request.getParameter("reg") != null) {
-			%><FONT color="green">Vous êtes correctement inscrit !</FONT>
-			<a href="Login.jsp">Cliquer ici pour vous connecter !</a><%
-		}
+		GETlogin = request.getParameter("login");	
+	}
+	
+	if (request.getParameter("reg") != null) {
+		%><FONT color="green">Vous êtes correctement inscrit !</FONT>
+		<a href="Login.jsp">Cliquer ici pour vous connecter !</a><%
 	}
 %>
 
