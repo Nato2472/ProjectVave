@@ -9,18 +9,18 @@ import Model.DatabaseHelper;
 
 public class CategorieManager {
 
-	private ArrayList<Categorie> categories = null;
+	private ArrayList<Categorie> categories;
 
-	public ArrayList<Categorie> getLieux() {
+	public ArrayList<Categorie> getCategories() {
 		return categories;
 	}
-	public void setLieux(ArrayList<Categorie> lieux) {
-		this.categories = lieux;
+	public void setCategories(ArrayList<Categorie> categories) {
+		this.categories = categories;
 	}
 
 	@SuppressWarnings("unused")
 	public CategorieManager() {
-		ArrayList<Categorie> categories = new ArrayList<Categorie>();
+		this.categories = new ArrayList<Categorie>();
 	}
 	
 	public void AddCate(Categorie c){
@@ -37,7 +37,7 @@ public class CategorieManager {
 		db.executeUpdate(query);
 	}	
 	public void GetListeCate(){
-		String query = "SELECT Id_Cate, Nom_Cate, Dexcrip_Cate FROM CATEGORIE";
+		String query = "SELECT Id_Cate,Nom_Cate,Descrip_Cate FROM CATEGORIE";
 		ResultSet rs = null;
 		DatabaseHelper db = new DatabaseHelper();
 		
@@ -54,6 +54,9 @@ public class CategorieManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("test");
+		} finally{
+			db.ConnectionClose();
 		}
 	}
 	

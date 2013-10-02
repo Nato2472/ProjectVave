@@ -81,9 +81,7 @@ public class DatabaseHelper {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally{
-			this.ConnectionClose();
-		}
+		} 
 		return rs;
 	}
 	

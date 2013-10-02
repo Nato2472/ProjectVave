@@ -1,5 +1,12 @@
+<%@page import="java.io.PrintWriter"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="Manager.CategorieManager" %>
+<%@page import="Model.Categorie" %>
+<%
+	String listcate = request.getParameter("listcate");
+	
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -35,6 +42,18 @@
 				</section>
 				
 				<section id="eval_content">
+					<% listcate = request.getParameter("listcate");
+						if (listcate.equals("aff")){ 
+							CategorieManager cmanager = new CategorieManager();
+							cmanager.GetListeCate();
+							
+							for ( Categorie c : cmanager.getCategories()){ %>
+								<a href='Categorie.jsp?listcate=cate&descrip=<%= c.getNom() %>'><li><%= c.getNom() %></li></a>
+							<%}%>
+						
+					<% }else{ %>
+					
+					<%} %>
 				</section>
 			</div>
 			

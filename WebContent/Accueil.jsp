@@ -24,7 +24,7 @@
 				<img/>
 			</div>
 			<span id="menu_button">
-				<input id="button_cate" type="button" value="Catégorie" onclick="self.location.href='Categorie.jsp'"/>
+				<input id="button_cate" type="button" value="Catégorie" onclick="self.location.href='Categorie.jsp?listcate=aff'"/>
 				<input id="button_lieu" type="button" value="Lieu" onclick="self.location.href='Error.html'"/>
 				<% if(session.getAttribute("login") == null){ %>
 					<input id="button_deco" type="button" value="Connexion" onclick="self.location.href='Login.jsp'"/>
