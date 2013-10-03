@@ -8,8 +8,11 @@
 <%
 	// serveur IP: 217.128.202.143
 	// keloud@osys.fr
-	//User u = (User) request.getAttribute("User");
-	User u = new User("nom", "prenom", "login", "mdp", new Date());
+	
+	User u = null;
+	if (session.getAttribute("currentUser") != null) {
+		u = (User) session.getAttribute("currentUser");
+	}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -40,6 +43,7 @@
 				<section id="user_content">
 					<b><u>Information:</u></b>
 					</br></br>
+					<% if (session.getAttribute("currentUser") != null) { %>
 					<u>Nom Prénom:</u>
 					</br>
 					<%= u.getPrenom() %> <%= u.getNom() %>
@@ -55,6 +59,7 @@
 					<u>Login:</u>
 					</br>
 					<%= u.getLogin() %>
+					<% } %>
 				</section>
 				
 				<section id="eval_content">

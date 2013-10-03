@@ -55,7 +55,6 @@ public class RegisterCheck extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		System.out.println("Dans le doPost");
 		// je recupère Login et Password entré par l'utilisateur
 		String lastname = request.getParameter("nom");
 		String firstname = request.getParameter("prenom");
@@ -103,7 +102,7 @@ public class RegisterCheck extends HttpServlet {
 					if (rs.next()) {
 						StrRes = rs.getObject(1).toString();
 					}
-					System.out.println("Résultat du ResultSet : " + StrRes);
+
 					
 					if ( StrRes.equals("0")) { // Si il y a aucune correspondance en BDD, j'inscris l'utilisateur.
 						pstmt = connexion.prepareStatement("INSERT INTO UTILISATEUR (Login_Uti, Prenom_Uti, Nom_Uti, Pseudo_Uti, Mdp_Uti, Date_Inscrip_Uti) VALUES (?, ?, ?, ?, ?, ?)");
@@ -123,7 +122,6 @@ public class RegisterCheck extends HttpServlet {
 						response.sendRedirect("register.jsp?reg=ok");
 	
 					} else {
-						System.out.println("Cet utilisateur existe déjà.");
 						response.sendRedirect("register.jsp?err=user" + ValGet);
 					}
 	
@@ -144,7 +142,6 @@ public class RegisterCheck extends HttpServlet {
 				
 			} else {
 				// les mots de passe de ne sont pas identiques.
-				System.out.println("Mot de passe non identique.");
 				response.sendRedirect("register.jsp?err=pass" + ValGet);
 			}
 		} else {
