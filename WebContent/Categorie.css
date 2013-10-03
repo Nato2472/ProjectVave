@@ -24,6 +24,26 @@
 	float: right;
 }
 
+#add_eval{
+	width: 150px;
+	height: 30px;
+	float: right;
+	margin-bottom: 10px;	
+}
+
+#eval{
+	border: 2px solid;
+	border-color: #cdcdcd;
+	padding: 5px;
+	background-color: #f0f0f0;
+	display: inline-block;
+	left: 300px;;
+	right: 100px;
+	top: 100px;
+	bottom: 10px;
+	min-width: 620px;
+}
+
 #logo{
 	background-color: #8800FF;
 	padding: 15px;
@@ -58,6 +78,7 @@
 	top: 100px;
 	bottom: 10px;
 	min-width: 635px;
+	overflow: scroll;
 }
 
 body{

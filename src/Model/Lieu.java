@@ -3,6 +3,7 @@ package Model;
 public class Lieu {
 
 	private double id = 0;
+	private String nom = null;
 	private int codepostal =0;
 	private String ville = null;
 	private String adresse = null;
@@ -15,6 +16,12 @@ public class Lieu {
 	}
 	public void setId(double id) {
 		this.id = id;
+	}
+	public String getNom() {
+		return nom;
+	}
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 	public int getCodepostal() {
 		return codepostal;
@@ -50,16 +57,18 @@ public class Lieu {
 	public Lieu() {
 		super();
 	}
-	public Lieu(double id, int codepostal, String ville, String adresse,
-			String telephone, int id_cate) {
+	public Lieu(double id, String nom, int codepostal, String ville,
+			String adresse, String telephone, int id_cate) {
 		super();
 		this.id = id;
+		this.nom = nom;
 		this.codepostal = codepostal;
 		this.ville = ville;
 		this.adresse = adresse;
 		this.telephone = telephone;
 		this.id_cate = id_cate;
 	}
+
 	
 	
 }

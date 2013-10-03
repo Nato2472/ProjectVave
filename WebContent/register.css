@@ -1,6 +1,6 @@
 @CHARSET "ISO-8859-1";
 
-#button_cate, #button_lieu{
+#button_cate{
 	border:solid;
 	border-style: solid;
 	border-color: #EEEEEE;
@@ -8,7 +8,7 @@
 	margin-top: 15px;
 }
 
-#button_ins{
+#button_deco{
 	border:solid;
 	border-style: solid;
 	border-color: #EEEEEE;
@@ -38,18 +38,17 @@ body{
 	min-width: 1240px;
 }
 
-#texte_co{
+#texte_ins{
 	display: inline-block;
 	float: left;
 }
 
-#connex{
+#field{
 	float:right;
 	background-color: #f0f0f0;
 	text-align: right;
 	width: 315px;
-	height: 150px;
+	height: 200px;
 	margin-right: 200px; 
 	display: inline-block;
-	padding-top: 50px;
 }

@@ -14,19 +14,25 @@
 		<img/>
 	</div>
 	<span id="menu_button">
-		<input id="button_cate" type="button" value="Catégorie" onclick="self.location.href='Categorie.jsp'"/>
-		<input id="button_lieu" type="button" value="Lieu" onclick="self.location.href='index.html'"/>
+		<input id="button_cate" type="button" value="Accueil" onclick="self.location.href='Accueil.jsp'"/>
 
 		<input id="button_ins" type="button" value="Inscription" method="post" onclick="self.location.href = 'register.jsp'"/>
 		
 		
 	</span>
 	<div id="content">
-
+		<div id="texte_co">
+		<h1>Bienvenue sur le site Vave.</h1>
+		</br>Vave est un site regroupant différent endroit où chaque utilisateur peut effectuer une évaluation sur un endroit</br>ou bien les consultés. Chacun est responsable des informations misent sur le site.
+		</br>Pour vous y connecter,
+		</br>veuillez renseignez les champs à droite pour effectuer votre connexion.
+		
+	
+		</div>
 		<%
             if (session.getAttribute("login") == null) {
         %>
-		       <fieldset>
+		       <fieldset id="connex" >
 		           <form action="Auth" method="post">
 		               <label for="login">Nom utilisateur:</label>
 		               <input type="text" name="login" id="login" required="true"><br>
@@ -34,9 +40,10 @@
 		               <input type="password" id="password" name="password" required="true"><br><br>
 		               <input type="submit" value="Login ">
 		           </form>
+		        </br>   
+	            <a href="register.jsp">Pas encore inscrit ? C'est ici !</a>
 		       </fieldset>
 			            
-	            <a href="register.jsp">Pas encore inscrit ? C'est ici !</a>
 		 
 		       <% if (session.getAttribute("error") == "1") { %>
 		           	<FONT color="red">Mauvais identifiant ou mot de passe !</FONT>

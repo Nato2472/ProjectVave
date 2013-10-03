@@ -60,5 +60,27 @@ public class CategorieManager {
 			db.ConnectionClose();
 		}
 	}
-	
+	public Categorie GetCateByNom(String nom){
+		String query = "SELECT Id_Cate,Nom_Cate,Descrip_Cate FROM CATEGORIE WHERE Nom_Cate ='" + nom + "'";
+		ResultSet rs = null;
+		DatabaseHelper db = new DatabaseHelper();
+		Categorie c = new Categorie();
+		
+		rs = db.executeQuery(query);
+		try {
+			if(rs.next()){
+				c.setId(rs.getInt(1));
+				c.setNom(rs.getString(2));
+				c.setDescription(rs.getString(3));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("test");
+		} finally{
+			db.ConnectionClose();
+		}
+		
+		return c;
+	}
 }
