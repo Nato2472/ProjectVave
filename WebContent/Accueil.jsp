@@ -63,6 +63,8 @@
 				</section>
 				
 				<section id="eval_content">
+				<iframe src="MapBing.html" style="height:420px; width:410px"></iframe>
+				
 				</section>
 			</div>		
 		</header>
