@@ -75,12 +75,12 @@ public class User {
 	 * Constructeur
 	 */
 
-	public User(String nom, String prenom, String login, String mdp, Date date) {
+	public User(String nom, String prenom, String login, String pseudo, Date date) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.login = login;
-		this.mdp = mdp;
+		this.pseudo = pseudo;
 		this.date = date;
 	}
 

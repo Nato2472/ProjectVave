@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import Model.User;
 
 /**
  * Servlet implementation class Auth
@@ -46,12 +49,8 @@ public class Auth extends HttpServlet {
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
 
-		System.out.println("Mon login : " + login);
-		System.out.println("Mon password : " + password);
 
-		// /////////////////////////////////////////////
 		// /////// Vérification IDs dans BDD ///////////
-		// /////////////////////////////////////////////
 		String url = "jdbc:jtds:sqlserver://217.128.202.143:1433/Vave";
 		String BDDuser = "sa";
 		String BDDpassword = "Mobile2013";
@@ -66,22 +65,33 @@ public class Auth extends HttpServlet {
 
 			connexion = DriverManager.getConnection(url, BDDuser, BDDpassword);
 
-			pstmt = connexion.prepareStatement("SELECT Login_Uti FROM UTILISATEUR WHERE Login_Uti = ? AND Mdp_Uti= ?;");
+			pstmt = connexion.prepareStatement("SELECT Login_Uti, Prenom_Uti, Nom_Uti, Pseudo_Uti, Date_Inscrip_Uti FROM UTILISATEUR WHERE Login_Uti = ? AND Mdp_Uti= ?;");
 			pstmt.setObject(1, login);
 			pstmt.setObject(2, password);
 			
 			rs = pstmt.executeQuery();
 			String rsLog = null;
+			String rsPre = null;
+			String rsNom = null;
+			String rsPse = null;
+			Date rsDate = null;
 			if (rs.next()) {
 				rsLog = rs.getObject(1).toString();
+				rsPre = rs.getObject(2).toString();
+				rsNom = rs.getObject(3).toString();
+				rsPse = rs.getObject(4).toString();
+				rsDate = rs.getDate(5);
 			}
-
-			System.out.println("Login depuis la BDD : " + rsLog);
 
 			// je créé une session
 			if (rsLog != null) {
 				HttpSession session = request.getSession();
+				// Création du User et placement dans Session
+				User u = new User(rsNom, rsPre, rsLog, rsPse, rsDate);
+				
 				session.setAttribute("login", rsLog);
+				session.setAttribute("currentUser", u);
+				
 				getServletContext().getRequestDispatcher("/Accueil.jsp").forward(
 						request, response);
 			} else if (rsLog == null) {
