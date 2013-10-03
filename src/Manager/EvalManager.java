@@ -18,9 +18,8 @@ public class EvalManager {
 		this.evaluations = evaluations;
 	}
 
-	@SuppressWarnings("unused")
 	public EvalManager() {
-		ArrayList<Evaluation> evaluations = new ArrayList<Evaluation>();
+		this.evaluations = new ArrayList<Evaluation>();
 	}
 	
 	public void AddEval(Evaluation e, int id_user, int id_eta){
@@ -30,12 +29,14 @@ public class EvalManager {
 		
 		DatabaseHelper db = new DatabaseHelper();
 		db.executeUpdate(query);
+		db.ConnectionClose();
 	}
 	public void DelEval(Evaluation e){
 		String query = "DELETE FROM EVALUATION WHERE Id_Eva = " + e.getId();
 		
 		DatabaseHelper db = new DatabaseHelper();
 		db.executeUpdate(query);
+		db.ConnectionClose();
 	}	
 	public void GetListeEval(){
 		String query = "SELECT Id_Eva,Date_Eva,Note_Eva,Com_Cour_Eva,Com_Long_Eva,Autre_Eva,Id_Uti,Id_Eta FROM EVALUATION";
@@ -60,6 +61,8 @@ public class EvalManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			db.ConnectionClose();
 		}
 	}
 

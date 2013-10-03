@@ -18,9 +18,8 @@ public class UserManager {
 		this.users = users;
 	}
 
-	@SuppressWarnings("unused")
 	public UserManager() {
-		ArrayList<User> evaluations = new ArrayList<User>();
+		this.users = new ArrayList<User>();
 	}
 	
 	public void AddUser(User u){
@@ -30,12 +29,14 @@ public class UserManager {
 		
 		DatabaseHelper db = new DatabaseHelper();
 		db.executeUpdate(query);
+		db.ConnectionClose();
 	}
 	public void DelUser(User u){
 		String query = "DELETE FROM UTILISATEUR WHERE Id_Uti = " + u.getId();
 		
 		DatabaseHelper db = new DatabaseHelper();
 		db.executeUpdate(query);
+		db.ConnectionClose();
 	}	
 	public void GetListeUser(){
 		String query = "SELECT  Id_Uti,Login_Uti, Prenom_Uti, Nom_Uti, Pseudo_Uti, Mdp_Uti, Date_Inscrip_UtiFROM EVALUATION";
@@ -59,6 +60,8 @@ public class UserManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			db.ConnectionClose();
 		}
 	}
 }

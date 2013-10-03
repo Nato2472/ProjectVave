@@ -18,7 +18,6 @@ public class CategorieManager {
 		this.categories = categories;
 	}
 
-	@SuppressWarnings("unused")
 	public CategorieManager() {
 		this.categories = new ArrayList<Categorie>();
 	}
@@ -29,12 +28,14 @@ public class CategorieManager {
 		
 		DatabaseHelper db = new DatabaseHelper();
 		db.executeUpdate(query);
+		db.ConnectionClose();
 	}
 	public void DelCate(Categorie c){
 		String query = "DELETE FROM CATEGORIE WHERE Id_Cate = " + c.getId();
 		
 		DatabaseHelper db = new DatabaseHelper();
 		db.executeUpdate(query);
+		db.ConnectionClose();
 	}	
 	public void GetListeCate(){
 		String query = "SELECT Id_Cate,Nom_Cate,Descrip_Cate FROM CATEGORIE";

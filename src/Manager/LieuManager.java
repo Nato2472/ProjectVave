@@ -18,9 +18,8 @@ public class LieuManager {
 		this.lieux = lieux;
 	}
 
-	@SuppressWarnings("unused")
 	public LieuManager() {
-		ArrayList<Lieu> lieux = new ArrayList<Lieu>();
+		this.lieux = new ArrayList<Lieu>();
 	}
 	
 	public void AddLieu(Lieu l){
@@ -30,12 +29,14 @@ public class LieuManager {
 		
 		DatabaseHelper db = new DatabaseHelper();
 		db.executeUpdate(query);
+		db.ConnectionClose();
 	}	
 	public void DelLieu(Lieu l){
 		String query = "DELETE FROM ETABLISSEMENT WHERE Id_Eta = " + l.getId();
 		
 		DatabaseHelper db = new DatabaseHelper();
 		db.executeUpdate(query);
+		db.ConnectionClose();
 	}	
 	public void GetListeLieu(){
 		String query = "SELECT Id_Eta,Adr_Eta,CP_Eta,Ville_Eta,Num_Tel_Eta,Id_Cate FROM ETABLISSEMENT";
@@ -59,6 +60,8 @@ public class LieuManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			db.ConnectionClose();
 		}
 	}
 	
