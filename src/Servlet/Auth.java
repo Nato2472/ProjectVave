@@ -52,6 +52,7 @@ public class Auth extends HttpServlet {
 
 		// /////// Vérification IDs dans BDD ///////////
 		String url = "jdbc:jtds:sqlserver://217.128.202.143:1433/Vave";
+		// String url = "jdbc:jtds:sqlserver://localhost:1433/Vave";
 		String BDDuser = "sa";
 		String BDDpassword = "Mobile2013";
 
