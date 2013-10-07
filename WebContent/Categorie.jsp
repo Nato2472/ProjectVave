@@ -6,6 +6,9 @@
 <%@page import="Model.Evaluation" %>
 <%@page import="Manager.LieuManager" %>
 <%@page import="Model.Lieu" %>
+<%@page import="Manager.UserManager" %>
+<%@page import="Model.User" %>
+
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 
@@ -76,28 +79,43 @@
 						if (listcate.equals("aff")){ 
 							cmanager.GetListeCate();
 							
-							%> <h1> Liste des Catégorie</h1><button id="add_eval" onclick="self.location.href='AddCate.jsp?Cate=null'">Ajouter une catégorie</button></br><hr> <%
+							%> <h1> Liste des Catégorie</h1>
+								
+								<% if(session.getAttribute("login") != null){ %>
+								<button id="add_eval" onclick="self.location.href='AddCate.jsp?Cate=null'">Ajouter une catégorie</button></br><% } %><hr> <%
 							for ( Categorie c : cmanager.getCategories()){ %>
 								<a href='Categorie.jsp?listcate=cate&descrip=<%= c.getNom() %>'><li><%= c.getNom() %></li></a>
 							<%}%>
 						
 					<% }else{ %>
 						<% emanager.GetListEvalByCate(cate);%> 
-							<h1>Liste des Evaluations</h1><a href="Categorie.jsp?listcate=aff"><i>Afficher toutes les catégories.</i></a><button id="add_eval">Ajouter une évaluation</button></br><hr> <%
+							<h1>Liste des Evaluations</h1><a href="Categorie.jsp?listcate=aff"><i>Afficher toutes les catégories.</i></a>
+								<% if(session.getAttribute("login") != null){ %>
+								<button id="add_eval">Ajouter une évaluation</button></br><%} %><hr> <%
 							for(Evaluation e : emanager.getEvalcate()){
 								eta = lmanager.GetLieuById(e.getId_eta());%>
 							<div id="eval">
-								<u><b>Etablissement:</b></u></br>
-								<%= eta.getNom() %></br> <%= eta.getAdresse() %></br> <%= eta.getCodepostal() %> <%= eta.getVille() %> </br>
-								<u>Tel:</u> <%= eta.getTelephone() %> </br></br>
-								<u><b>Evaluation:</b></u>
-								</br>
-								<u>Titre:</u> <%= e.getNom() %>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Note:<%= e.getNote() %>/5   &nbsp;&nbsp;&nbsp; <%= e.getDateEval() %>
-								</br>
-								<u>Objet:</u> <%= e.getComCourt() %></br>
-								<u>Commentaire:</u></br>
-								<%= e.getComLong() %></br>
-								
+								<div id="eta">
+									<u><b>Etablissement:</b></u></br>
+									<%= eta.getNom() %></br> <%= eta.getAdresse() %></br> <%= eta.getCodepostal() %> <%= eta.getVille() %> </br>
+									<u>Tel:</u> <%= eta.getTelephone() %> </br></br>
+								</div>
+								<div id="user_eval">
+									<u><b>Evaluateur:</b></u>
+									<% User u = new User();
+										UserManager umanager = new UserManager();
+										u = umanager.GetUserById(e.getId_uti());%>
+										<%= u.getPseudo() %>
+								</div>
+								<div id="carac_eval">
+									<u><b>Evaluation:</b></u>
+									</br>
+									<u>Titre:</u> <%= e.getNom() %>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Note:<%= e.getNote() %>/5   &nbsp;&nbsp;&nbsp; <%= e.getDateEval() %>
+									</br>
+									<u>Objet:</u> <%= e.getComCourt() %></br>
+									<u>Commentaire:</u></br>
+									<%= e.getComLong() %></br>
+								</div>
  							</div>
  							</br></br>
 						<% } %>

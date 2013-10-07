@@ -76,8 +76,11 @@
 				
 				<section id="eval_content">
 						<% emanager.GetEvalLast();%>
-						<h1>Dernières Evaluations</h1><button id="add_eval" onclick="self.location.href='AddCate.jsp?Cate=null'">Ajouter une évaluation</button></br><hr>
-							
+						<h1>Dernières Evaluations</h1>
+						<% if(session.getAttribute("login") != null){ %>
+						<button id="add_eval" onclick="self.location.href='AddCate.jsp?Cate=null'">Ajouter une évaluation</button></br>
+						<% } %>
+						<hr>	
 						<% for(Evaluation e : emanager.getEvallast()){
 							eta = lmanager.GetLieuById(e.getId_eta());%>
 							<div id="eval">

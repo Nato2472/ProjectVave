@@ -39,7 +39,7 @@ public class UserManager {
 		db.ConnectionClose();
 	}	
 	public void GetListeUser(){
-		String query = "SELECT  Id_Uti,Login_Uti, Prenom_Uti, Nom_Uti, Pseudo_Uti, Mdp_Uti, Date_Inscrip_UtiFROM EVALUATION";
+		String query = "SELECT  Id_Uti,Login_Uti, Prenom_Uti, Nom_Uti, Pseudo_Uti, Mdp_Uti, Date_Inscrip_Uti FROM UTILISATEUR";
 		ResultSet rs = null;
 		DatabaseHelper db = new DatabaseHelper();
 		
@@ -63,5 +63,32 @@ public class UserManager {
 		}finally{
 			db.ConnectionClose();
 		}
+	}
+	public User GetUserById(double id){
+		String query = "SELECT  Id_Uti,Login_Uti, Prenom_Uti, Nom_Uti, Pseudo_Uti, Mdp_Uti, Date_Inscrip_Uti FROM UTILISATEUR WHERE Id_Uti =" + id;
+		ResultSet rs = null;
+		DatabaseHelper db = new DatabaseHelper();
+		User u = new User();
+		
+		rs = db.executeQuery(query);
+		try {
+			if(rs.next()){
+				u.setId(rs.getDouble(1));
+				u.setLogin(rs.getString(2));
+				u.setPrenom(rs.getString(3));
+				u.setNom(rs.getString(4));
+				u.setPseudo(rs.getString(5));
+				u.setMdp(rs.getString(6));
+				u.setDate(rs.getDate(7));
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			db.ConnectionClose();
+		}
+		
+		return u;
 	}
 }
