@@ -49,8 +49,11 @@ public class AddEvalServlet extends HttpServlet {
 		String autreComEval = request.getParameter("autreComEval");
 		String idUserTemp = request.getParameter("idUser");
 		String comboBoxCat = request.getParameter("comboBoxCat");
+		String comboBoxLieu = request.getParameter("comboBoxLieu");
 		
 		System.err.println("comboBoxCat = " + comboBoxCat);
+		System.err.println("comboBoxLieu = " + comboBoxLieu);
+		
 		Double idUser = 15.0;
 		float note = -1;
 

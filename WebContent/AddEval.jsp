@@ -4,6 +4,8 @@
     <%@page import="java.util.ArrayList"%>
     <%@page import="Manager.CategorieManager"%>
     <%@page import="Model.Categorie" %>
+    <%@page import="Manager.LieuManager"%>
+    <%@page import="Model.Lieu" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <%
@@ -19,11 +21,18 @@ if (session.getAttribute("currentUser") != null) {
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Ajout d'une évaluation</title>
 <script>
-var lieux = [];
+<%
+LieuManager lm = new LieuManager();
+lm.GetListeLieu();
+ArrayList<Lieu> ListeLieu = lm.getLieux();
+%>
 
-lieux['0'] = ["Paris", "Londres"];
-lieux['1'] = ["Tokyo", "Moscou", "Berlin"];
-lieux['0'][3] = "Madrid";
+var lieux = [];
+<% for (int i = 0; i < ListeLieu.size() ; i++) { %>
+	lieux['<%=ListeLieu.get(i).getId_cate()%>'][<%=i%>] = "" + <%=ListeLieu.get(i).getNom()%> + "";
+<% } %>
+
+
 function Remplir(value)
 {
 	var cbtofill = document.forms["formulaire"]["comboBoxLieu"];
@@ -46,8 +55,7 @@ function Remplir(value)
 </script>
 </head>
 <body>
-<%
-CategorieManager cm = new CategorieManager();
+<% CategorieManager cm = new CategorieManager();
 cm.GetListeCate();
 ArrayList<Categorie> ListeCat = cm.getLieux();
 
@@ -57,8 +65,8 @@ if (request.getParameter("err") != null) {
 		<script>alert('Les champs ne sont pas tous remplis');</script><%
 	}  else if(desErr.equals("note")) { %>
 		<script>alert('La note n\'est pas valide');</script><% 
-	} else {
-		%><script>alert('Vous cherchez les problèmes !');</script><%
+	} else { %>
+		<script>alert('Vous cherchez les problèmes !');</script><%
 	}
 }
 %>
@@ -88,7 +96,7 @@ if (request.getParameter("err") != null) {
 	               <label for="lieuEval">Lieu correspondant a votre évaluation.</label>
 	               <select name="comboBoxCat" id="comboBoxCat" size="1" onChange="Remplir(this.value);"> 
 	               <% for (int i = 0; i < ListeCat.size() ; i++) { %>
-					<option value="<%=ListeCat.get(i)%>"><%=ListeCat.get(i) %></option> 
+					<option value="<%=ListeCat.get(i).getId()%>"><%=ListeCat.get(i) %></option> 
 					<% } %>
 					</select>
 	               <select name="comboBoxLieu" id="comboBoxLieu" size="1"> 
@@ -125,7 +133,7 @@ if (request.getParameter("err") != null) {
 		               <select name="comboBoxCat" id="comboBoxCat" size="1" onChange="Remplir(this.value);"> 
 		               <% for (int i = 0; i < ListeCat.size(); i++) {
 		               %>
-						<option value="<%=ListeCat.get(i)%>"><%=ListeCat.get(i) %></option> 
+						<option value="<%=ListeCat.get(i).getId()%>"><%=ListeCat.get(i) %></option> 
 						<% } %>
 						</select>
 		               <select name="comboBoxLieu" id="comboBoxLieu" size="1"> 

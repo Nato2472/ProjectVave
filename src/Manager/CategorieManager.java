@@ -43,17 +43,20 @@ public class CategorieManager {
 		
 		rs = db.executeQuery(query);
 		try {
-			if(rs.last()){
+			while(rs.next()){
 				Categorie c = new Categorie();
 				c.setId(rs.getInt(1));
 				c.setNom(rs.getString(2));
 				c.setDescription(rs.getString(3));
 				
 				this.categories.add(c);
+				System.err.println("test erreur"); /////////////////////////////////////////////////////////////////////
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			db.ConnectionClose();
 		}
 	}
 	
