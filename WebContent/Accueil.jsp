@@ -14,14 +14,17 @@
 		u = (User) session.getAttribute("currentUser");
 	}
 %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<link rel="stylesheet" type="text/css" href="Accueil.css"/>
+		<meta name="viewport" content="width=device-width, target-densitydpi=device-dpi"/>
+		<link rel="stylesheet" type="text/css" href="AccueilMobil.css"/>
 		<title>Accueil</title>
 	</head>
 	<body>
+	<div id="bloc_page">
 		<header>
 			<div id="logo">
 				<img/>
@@ -39,6 +42,7 @@
 					</div>
 				<% }%>
 			</span>
+			</header>
 			<div id="content">
 				<section id="user_content">
 					<b><u>Information:</u></b>
@@ -63,13 +67,18 @@
 				</section>
 				
 				<section id="eval_content">
-				<iframe src="MapBing.html" style="height:420px; width:410px"></iframe>
+				bla bla bla categorie bla bla bla
+				texte texte encore du texte.
+				Test test this is a test.</br>
+				One two one two.
+				</br><iframe src="MapBing.html" style="height:420px; width:410px"></iframe>
 				
 				</section>
 			</div>		
-		</header>
+		
 		<section>
 			
 		</section>	
+		</div>
 	</body>
 </html>

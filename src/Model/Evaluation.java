@@ -6,13 +6,14 @@ public class Evaluation {
 
 	private double id = 0;
 	private Date dateEval = null;
+	private String nomEval = null;
 	private float note = 0;
 	private String comCourt = null;
 	private String comLong = null;
 	private String autreEva = null;
 	private double id_uti = 0;
 	private double id_eta = 0;
-	
+	private double id_Cate = 0;
 	
 	public double getId() {
 		return id;
@@ -62,23 +63,31 @@ public class Evaluation {
 	public void setId_eta(double id_eta) {
 		this.id_eta = id_eta;
 	}
+	public String getNomEval() {
+		return nomEval;
+	}
+	public void setNomEval(String nomEval) {
+		this.nomEval = nomEval;
+	}
+	public double getId_Cate() {
+		return id_Cate;
+	}
+	public void setId_Cate(double id_Cate) {
+		this.id_Cate = id_Cate;
+	}
 	
 	public Evaluation() {
 		super();
 	}
-	public Evaluation(double id, Date dateEval, float note, String comCourt,
-			String comLong, String autreEva, double id_uti, double id_eta) {
+	public Evaluation(String nomEval, float note, String comCourt,
+			String comLong, String autreEva) {
 		super();
-		this.id = id;
-		this.dateEval = dateEval;
+		this.nomEval = nomEval;
 		this.note = note;
 		this.comCourt = comCourt;
 		this.comLong = comLong;
 		this.autreEva = autreEva;
-		this.id_uti = id_uti;
-		this.id_eta = id_eta;
 	}
-	
 	
 	
 }

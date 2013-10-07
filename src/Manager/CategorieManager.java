@@ -37,13 +37,13 @@ public class CategorieManager {
 		db.executeUpdate(query);
 	}	
 	public void GetListeCate(){
-		String query = "SELECT Id_Cate, Nom_Cate, Dexcrip_Cate FROM CATEGORIE";
+		String query = "SELECT Id_Cate, Nom_Cate, Descrip_Cate FROM CATEGORIE";
 		ResultSet rs = null;
 		DatabaseHelper db = new DatabaseHelper();
 		
 		rs = db.executeQuery(query);
 		try {
-			while(rs.next()){
+			if(rs.last()){
 				Categorie c = new Categorie();
 				c.setId(rs.getInt(1));
 				c.setNom(rs.getString(2));
