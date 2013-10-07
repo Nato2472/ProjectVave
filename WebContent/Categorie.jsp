@@ -18,6 +18,13 @@
 	LieuManager lmanager = new LieuManager();
 	Lieu eta = new Lieu();
 	List<Evaluation> evalcate = new ArrayList<Evaluation>();
+
+	String ajout = "Error";
+	if( ajout.equals(session.getAttribute("AjoutCate"))){ %>
+	<script type="text/javascript">
+	alert("Vous avez entré un nom de catégorie déjà existant! Veuillez recommencer!");
+	</script> <%
+	}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -51,7 +58,7 @@
 						<%if (listcate.equals("aff")){ %>
 							<i>Cliquez sur une catégorie pour afficher ses informations</i>
 						<% } else { %>
-							<% cate = cmanager.GetCateByNom(cateaff); %>
+							<% cate = cmanager.GetCateByNom(cateaff);%>
 							<b><u>Nom:</u></b>
 							</br>
 							<%= cate.getNom() %>
@@ -60,7 +67,7 @@
 							</br>
 							<%= cate.getDescription() %>
 							</br></br>
-							<a href="Categorie.jsp?listcate=aff"><i>Afficher toutes les catégories.</i></a>
+							<a href="AddCate.jsp?Cate=<%= cate.getNom() %>"><i>Modifier la catégorie</i></a>
 						<% } %>
 				</section>
 				
@@ -69,15 +76,14 @@
 						if (listcate.equals("aff")){ 
 							cmanager.GetListeCate();
 							
-							%> <h1> Liste des Catégorie</h1><hr> <%
+							%> <h1> Liste des Catégorie</h1><button id="add_eval" onclick="self.location.href='AddCate.jsp?Cate=null'">Ajouter une catégorie</button></br><hr> <%
 							for ( Categorie c : cmanager.getCategories()){ %>
 								<a href='Categorie.jsp?listcate=cate&descrip=<%= c.getNom() %>'><li><%= c.getNom() %></li></a>
 							<%}%>
 						
 					<% }else{ %>
-						<% emanager.GetListEvalByCate(cate);
-						
-						%> <h1>Liste des Evaluations</h1><button id="add_eval">Ajouter une évaluation</button></br><hr> <%
+						<% emanager.GetListEvalByCate(cate);%> 
+							<h1>Liste des Evaluations</h1><a href="Categorie.jsp?listcate=aff"><i>Afficher toutes les catégories.</i></a><button id="add_eval">Ajouter une évaluation</button></br><hr> <%
 							for(Evaluation e : emanager.getEvalcate()){
 								eta = lmanager.GetLieuById(e.getId_eta());%>
 							<div id="eval">
@@ -93,6 +99,7 @@
 								<%= e.getComLong() %></br>
 								
  							</div>
+ 							</br></br>
 						<% } %>
 					<%} %>
 				</section>

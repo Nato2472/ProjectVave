@@ -30,6 +30,12 @@ public class CategorieManager {
 		db.executeUpdate(query);
 		db.ConnectionClose();
 	}
+	public void ModifyCate(Categorie c){
+		String query = "UPDATE CATEGORIE SET Nom_Cate = '" + c.getNom() + "', Descrip_Cate= '" + c.getDescription() + "' WHERE Id_Cate = " + c.getId();
+		DatabaseHelper db = new DatabaseHelper();
+		db.executeUpdate(query);
+		db.ConnectionClose();
+	}
 	public void DelCate(Categorie c){
 		String query = "DELETE FROM CATEGORIE WHERE Id_Cate = " + c.getId();
 		
@@ -82,5 +88,31 @@ public class CategorieManager {
 		}
 		
 		return c;
+	}
+	public boolean GetFree(String nom){
+		String query = "SELECT count(Nom_Cate) FROM CATEGORIE WHERE Nom_Cate ='" + nom + "'";
+		ResultSet rs = null;
+		DatabaseHelper db = new DatabaseHelper();
+		boolean val = true;
+		
+		rs = db.executeQuery(query);
+		try {
+			if(rs.next()){
+				if (rs.getInt(1) >= 1){
+					val = false;
+				}else{
+					val = true;
+				}
+			}else{
+				val = false;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("test");
+		} finally{
+			db.ConnectionClose();
+		}
+		return val;
 	}
 }
