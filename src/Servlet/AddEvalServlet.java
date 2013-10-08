@@ -10,12 +10,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.util.SessionConfig;
 
 import Manager.EvalManager;
 import Model.DatabaseHelper;
 import Model.Evaluation;
+import Model.User;
 
 /**
  * Servlet implementation class AddEvalServlet
@@ -49,22 +51,23 @@ public class AddEvalServlet extends HttpServlet {
 		String comCourtEval = request.getParameter("comCourtEval");
 		String comLongEval = request.getParameter("comLongEval");
 		String autreComEval = request.getParameter("autreComEval");
-		String idUserTemp = request.getParameter("idUser");
 		String comboBoxLieu = request.getParameter("comboBoxLieu");
-	
-		Double idUser = 15.0;
+		
+		HttpSession session = request.getSession();
+		User u = (User)session.getAttribute("currentUser");
+		
+		
 		float note = -1;
 		Double idLieu = null;
 
 		if ((nameEval.length() > 1) & (noteEval.length() > 0) & (comCourtEval.length() > 1) & (comLongEval.length() > 1) ) {
 			
 			try {
-				idLieu = Double.parseDouble(comboBoxLieu);
-				idUser = Double.parseDouble(idUserTemp); // String to Double
+				idLieu = Double.parseDouble(comboBoxLieu); // String to Double
 				note = Float.parseFloat(noteEval); // String to Float
 			} catch (NumberFormatException n) {
 				n.printStackTrace();
-				System.err.println("idUser = " + idUser + " et note = " + note); // Verification des Parses
+				System.err.println("idUser = " + u.getId() + " et note = " + note); // Verification des Parses
 				response.sendRedirect("AddEval.jsp?err=note");
 				return;
 			}
@@ -90,7 +93,7 @@ public class AddEvalServlet extends HttpServlet {
 				}
 				
 				
-				eval.setId_uti(idUser);
+				eval.setId_uti(u.getId());
 				eval.setId_eta(idLieu);
 				eval.setId_cate(idCat);
 				Emanager.AddEval(eval);

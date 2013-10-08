@@ -60,6 +60,7 @@ public class Auth extends HttpServlet {
 		String rsNom = null;
 		String rsPse = null;
 		Date rsDate = null;
+		Double rsIdUti = null;
 		
 		try {
 			if (rs.next()) {
@@ -68,6 +69,7 @@ public class Auth extends HttpServlet {
 				rsNom = rs.getObject(3).toString();
 				rsPse = rs.getObject(4).toString();
 				rsDate = rs.getDate(5);
+				rsIdUti = Double.parseDouble(rs.getObject(6).toString());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -79,7 +81,7 @@ public class Auth extends HttpServlet {
 		if (rsLog != null) {
 			HttpSession session = request.getSession();
 			// Création du User et placement dans Session
-			User u = new User(rsNom, rsPre, rsLog, rsPse, rsDate);
+			User u = new User(rsNom, rsPre, rsLog, rsPse, rsDate, rsIdUti);
 			
 			session.setAttribute("login", rsLog);
 			session.setAttribute("currentUser", u);
