@@ -1,17 +1,52 @@
 @CHARSET "ISO-8859-1";
 
-#texte_co{
-	display: inline-block;
-	float: left;
+@media all and (max-device-width: 1024px)
+{
+	#texte_co{
+		display: inline-block;
+		float: left;
+	}
+	
+	#connex{
+		float:right;
+		background-color: #f0f0f0;
+		text-align: right;
+		width: 500px;
+		height: 400px;
+		margin-right: 200px; 
+		display: inline-block;
+		padding-top: 30px;
+		font-size: 35px;
+	}
+	
+	#password, #login{
+		widht: 100px;
+		height: 50px;
+		font-size: 35px;
+	}
+	
+	#log{
+		widht: 100px;
+		height: 50px;
+		font-size: 35px;
+	}
 }
 
-#connex{
-	float:right;
-	background-color: #f0f0f0;
-	text-align: right;
-	width: 315px;
-	height: 150px;
-	margin-right: 200px; 
-	display: inline-block;
-	padding-top: 50px;
+@media all and (min-device-width: 1025px)
+{
+	#texte_co{
+		display: inline-block;
+		float: left;
+	}
+	
+	#connex{
+		float:right;
+		background-color: #f0f0f0;
+		text-align: right;
+		width: 315px;
+		height: 150px;
+		margin-right: 200px; 
+		display: inline-block;
+		padding-top: 50px;
+	}
 }

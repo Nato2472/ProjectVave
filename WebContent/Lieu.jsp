@@ -26,24 +26,28 @@
 	if( ajout.equals(session.getAttribute("AjoutLieu")) & ajout.equals(session.getAttribute("AjoutCP")) == false){ %>
 		<script type="text/javascript">
 			alert("Vous avez entré un nom de catégorie déjà existant! Veuillez recommencer!");
-		</script> <%
+		</script> 
+		<%
 		ajout = null;
 		session.setAttribute("AjoutLieu", "Valid");
 	}
 	if( ajout.equals(session.getAttribute("AjoutLieu")) & ajout.equals(session.getAttribute("AjoutCP"))){ %>
 	<script type="text/javascript">
-		alert("Vous avez entré un code postal non valid!");
+		alert("Vous avez entré un code postal non valide!");
 	</script> <%
 	ajout = null;
 	session.setAttribute("AjoutLieu", "Valid");
 	session.setAttribute("AjoutCP", "Valid" );
 }
 %>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<link rel="stylesheet" type="text/css" href="Categorie.css"/>
+		<link rel="stylesheet" type="text/css" href="Commun.css"/>
+		<link rel="stylesheet" type="text/css" href="Eval.css"/>
 	<title>Lieu</title>
 </head>
 	<body>
@@ -52,20 +56,20 @@
 				<img/>
 			</div>
 			<span id="menu_button">
-				<input id="button_cate" type="button" value="Accueil" onclick="self.location.href='Accueil.jsp'"/>
-				<input id="button_lieu" type="button" value="Catégorie" onclick="self.location.href='Categorie.jsp?listcate=aff'"/>
+				<input id="button_menu_left" type="button" value="Accueil" onclick="self.location.href='Accueil.jsp'"/>
+				<input id="button_menu_left" type="button" value="Catégorie" onclick="self.location.href='Categorie.jsp?listcate=aff'"/>
 				<% if(session.getAttribute("login") == null){ %>
-					<input id="button_deco" type="button" value="Connexion" onclick="self.location.href='Login.jsp'"/>
-					<input id="button_ins" type="button" value="Inscription" onclick="self.location.href = 'register.jsp'"/>
+					<input id="button_menu_right" type="button" value="Connexion" onclick="self.location.href='Login.jsp'"/>
+					<input id="button_menu_right" type="button" value="Inscription" onclick="self.location.href = 'register.jsp'"/>
 				<% } else{ %>
-					<input id="button_deco" type="submit" value="Déconnexion" onclick="self.location.href = 'Logout'"/>
+					<input id="button_menu_right" type="submit" value="Déconnexion" onclick="self.location.href = 'Logout'"/>
 					<div id="msg_co">
 						Bonjour <%= session.getAttribute("login") %>
 					</div>
 				<% } %>
 			</span>
 			<div id="content">
-				<section id="cate_content">
+				<section id="info_content">
 					<b><u>Information:</u></b>
 					</br></br>
 						<%if (listlieu.equals("aff")){ %>
@@ -96,7 +100,7 @@
 						<% } %>
 				</section>
 				
-				<section id="eval_content">
+				<section id="main_content">
 					<% listlieu = request.getParameter("listlieu");
 						// Affichage de la liste des lieux
 						if (listlieu.equals("aff")){ 
@@ -116,7 +120,7 @@
 						<% emanager.GetListEvalByLieu(lieu);%> 
 							<h1>Liste des Evaluations</h1><a href="Lieu.jsp?listlieu=aff"><i>Afficher touts les lieux.</i></a>
 								<% if(session.getAttribute("login") != null){ %>
-								<button id="add_eval">Ajouter une évaluation</button></br><%} %><hr> <%
+								<button id="add_eval" onclick="self.location.href='AddEval.jsp'">Ajouter une évaluation</button></br><%} %><hr> <%
 							for(Evaluation e : emanager.getEvallieu()){
 								eta = lmanager.GetLieuById(e.getId_eta());%>
 							<div id="eval">

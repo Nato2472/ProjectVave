@@ -19,69 +19,97 @@ if (session.getAttribute("currentUser") != null) {
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<link rel="stylesheet" type="text/css" href="Commun.css"/>
+		<link rel="stylesheet" type="text/css" href="AddCate.css"/>
 <title>Ajout d'une évaluation</title>
 
 </head>
 <body>
-<% LieuManager lm = new LieuManager();
-lm.GetListeLieu();
-ArrayList<Lieu> ListeLieu = lm.getLieux();
-
-
-if (request.getParameter("err") != null) {
-	String desErr = request.getParameter("err");
-	if (desErr.equals("champs")) { %>
-		<script>alert('Les champs ne sont pas tous remplis');</script><%
-	}  else if(desErr.equals("note")) { %>
-		<script>alert('La note n\'est pas valide');</script><% 
-	}  else if(desErr.equals("ok")) { %>
-	<script>alert('Evaluation ajouté !');</script><% 
-}	 else { %>
-		<script>alert('Vous cherchez les problèmes !');</script><%
-	}
-}
-%>
-
-
-
-
-<fieldset>
-			<% if (request.getParameter("nameEval") != null) { %>
+	<header>
+		<div id="logo">
+			<img/>
+		</div>
+		<span id="menu_button">
+			<input id="button_menu_left" type="button" value="Accueil" onclick="self.location.href='Accueil.jsp'"/>
+			<input id="button_menu_left" type="button" value="Catégorie" onclick="self.location.href='Categorie.jsp?listcate=aff'"/>
+			<input id="button_menu_left" type="button" value="Lieu" onclick="self.location.href='Lieu.jsp?listlieu=aff'"/>
+			<% if(session.getAttribute("login") == null){ %>
+				<input id="button_menu_right" type="button" value="Connexion" onclick="self.location.href='Login.jsp'"/>
+				<input id="button_menu_right" type="button" value="Inscription" onclick="self.location.href='register.jsp'"/>
+			<% } else{ %>
+				<input id="button_menu_right" type="submit" value="Déconnexion" onclick="self.location.href='Logout.java'"/>
+				<div id="msg_co">
+					Bonjour <%= session.getAttribute("login") %>
+				</div>
+			<% }%>
+		</span>
+		<div id="content">
+			<section id="info_content">
+					<h1>Ajout d'une Evaluation</h1>
+					Pour ajouter une nouvelle evaluation, veuillez remplir les champs.
+					Veillez à renseigner comme il se doit les champs.
+			</section>
 			
-				<form name="formulaire" action="AddEvalServlet" method="post">
-	               <label for="nameEval">Titre pour votre évaluation:</label>
-	               <input type="text" name="nameEval" id="nameEval" required="true" value=<%=request.getParameter("nameEval")%>><br>
-	               
-	               <label for="noteEval">Note (de 1 à 5):</label>
-	               <input type="text" id="noteEval" name="noteEval" required="true" value=<%=request.getParameter("noteEval")%>><br>
-	               
-	               <label for="comCourtEval">Commentaire court (résumé):</label>
-	               <input type="text" name="comCourtEval" id="comCourtEval" required="true" value=<%=request.getParameter("comCourtEval")%>><br>
-	               
-	               <label for="comLongEval">Commentaire détaillé:</label>
-	               <input type="text" id="comLongEval" name="comLongEval" required="true" size=100 value=<%=request.getParameter("comLongEval")%>><br>
-	               
-	               <label for="autreComEval">Un dernier détail ?</label>
-	               <input type="text" name="autreConEval" id="autreComEval" value=<%=request.getParameter("autreComEval")%>><br>
-	               
-	               <label for="lieuEval">Lieu correspondant a votre évaluation.</label>
-	               <select name="comboBoxLieu" id="comboBoxLieu" size="1" onChange="Remplir(this.value);"> 
-	               <% for (int i = 0; i < ListeLieu.size() ; i++) { %>
-					<option value="<%=ListeLieu.get(i).getId()%>"><%=ListeLieu.get(i).getNom() %></option> 
-					<% } %>
-					</select><input id="button_lieu" type="button" value="AddLieu" onclick="self.location.href='AddLieu.jsp?Lieu=null'"/>
-	               
-	               
-	               <% //if (session.getAttribute("currentUser") != null) { idUser = u.getId();%>
-	               <input type="hidden" name="idUser" id="idUser" value=15><br>
-	               <% //} %>
-	               <input type="submit" value="Ajouter">
-	           </form>
-	           
-	           
-			<% } else { %>
-
-
+			<section id="main_content">
+				<% LieuManager lm = new LieuManager();
+				lm.GetListeLieu();
+				ArrayList<Lieu> ListeLieu = lm.getLieux();
+				
+				
+				if (request.getParameter("err") != null) {
+					String desErr = request.getParameter("err");
+					if (desErr.equals("champs")) { %>
+						<script>alert('Les champs ne sont pas tous remplis');</script><%
+					}  else if(desErr.equals("note")) { %>
+						<script>alert('La note n\'est pas valide');</script><% 
+					}  else if(desErr.equals("ok")) { %>
+					<script>alert('Evaluation ajouté !');</script><% 
+				}	 else { %>
+						<script>alert('Vous cherchez les problèmes !');</script><%
+					}
+				}
+				%>
+				
+				
+				
+				
+				<fieldset>
+					<% if (request.getParameter("nameEval") != null) { %>
+				
+					<form name="formulaire" action="AddEvalServlet" method="post">
+		               <label for="nameEval">Titre pour votre évaluation:</label>
+		               <input type="text" name="nameEval" id="nameEval" required="true" value=<%=request.getParameter("nameEval")%>><br>
+		               
+		               <label for="noteEval">Note (de 1 à 5):</label>
+		               <input type="text" id="noteEval" name="noteEval" required="true" value=<%=request.getParameter("noteEval")%>><br>
+		               
+		               <label for="comCourtEval">Commentaire court (résumé):</label>
+		               <input type="text" name="comCourtEval" id="comCourtEval" required="true" value=<%=request.getParameter("comCourtEval")%>><br>
+		               
+		               <label for="comLongEval">Commentaire détaillé:</label>
+		               <input type="text" id="comLongEval" name="comLongEval" required="true" size=100 value=<%=request.getParameter("comLongEval")%>><br>
+		               
+		               <label for="autreComEval">Un dernier détail ?</label>
+		               <input type="text" name="autreConEval" id="autreComEval" value=<%=request.getParameter("autreComEval")%>><br>
+		               
+		               <label for="lieuEval">Lieu correspondant a votre évaluation.</label>
+		               <select name="comboBoxLieu" id="comboBoxLieu" size="1" onChange="Remplir(this.value);"> 
+		               <% for (int i = 0; i < ListeLieu.size() ; i++) { %>
+						<option value="<%=ListeLieu.get(i).getId()%>"><%=ListeLieu.get(i).getNom() %></option> 
+						<% } %>
+						</select><input id="button_lieu" type="button" value="AddLieu" onclick="self.location.href='AddLieu.jsp?Lieu=null'"/>
+		               
+		               
+		               <% //if (session.getAttribute("currentUser") != null) { idUser = u.getId();%>
+		               <input type="hidden" name="idUser" id="idUser" value=15><br>
+		               <% //} %>
+		               <input type="submit" value="Ajouter">
+		           </form>
+		           
+		           
+				<% } else { %>
+	
+	
 		           <form name="formulaire" action="AddEvalServlet" method="post">
 		               <label for="nameEval">Titre pour votre évaluation:</label>
 		               <input type="text" name="nameEval" id="nameEval" required="true"><br>
@@ -112,6 +140,8 @@ if (request.getParameter("err") != null) {
 		           </form>
 		           
 		           <% } %>
-		       </fieldset>
+	       </fieldset>
+       </section>
+	</div>
 </body>
 </html>

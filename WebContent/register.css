@@ -1,54 +1,45 @@
 @CHARSET "ISO-8859-1";
 
-#button_cate{
-	border:solid;
-	border-style: solid;
-	border-color: #EEEEEE;
-	vertical-align: center;
-	margin-top: 15px;
+
+@media all and (max-device-width: 1024px)
+{
+	#texte_ins{
+		display: inline-block;
+		float: left;
+	}
+	
+	#field{
+		float:right;
+		background-color: #f0f0f0;
+		text-align: right;
+		width: 870px;
+		height: 450px;
+		margin-right: 25px; 
+		display: inline-block;
+		font-size: 35px;
+	}
+	
+	#nom, #prenom, #pseudo, #login, #password, #password2, #ins{
+		widht: 85px;
+		height: 50px;
+		font-size: 35px;	
+	}
 }
 
-#button_deco{
-	border:solid;
-	border-style: solid;
-	border-color: #EEEEEE;
-	vertical-align: center;
-	margin-top: 15px;
-	text-align: right;
-	float: right;
-}
-
-#logo{
-	background-color: #8800FF;
-	padding: 15px;
-}
-
-#content{
-	margin-top: 25px;
-	min-height: 850px;
-	min-width: 530px;
-}
-
-body{
-	margin-left: 100px;
-	margin-right: 100px;
-	margin-top: 10 px;
-	margin-bottom: 10px;
-	min-height: 530px;
-	min-width: 1240px;
-}
-
-#texte_ins{
-	display: inline-block;
-	float: left;
-}
-
-#field{
-	float:right;
-	background-color: #f0f0f0;
-	text-align: right;
-	width: 315px;
-	height: 200px;
-	margin-right: 200px; 
-	display: inline-block;
+@media all and (min-device-width: 1025px)
+{
+	#texte_ins{
+		display: inline-block;
+		float: left;
+	}
+	
+	#field{
+		float:right;
+		background-color: #f0f0f0;
+		text-align: right;
+		width: 315px;
+		height: 200px;
+		margin-right: 200px; 
+		display: inline-block;
+	}
 }

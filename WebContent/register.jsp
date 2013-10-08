@@ -14,6 +14,7 @@ String GETlogin = "";
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<link rel="stylesheet" type="text/css" href="Commun.css"/>
 <link rel="stylesheet" type="text/css" href="register.css"/>
 <title>Page d'inscription</title>
 </head>
@@ -22,11 +23,11 @@ String GETlogin = "";
 		<img/>
 	</div>
 	<span id="menu_button">
-		<input id="button_cate" type="button" value="Accueil" onclick="self.location.href='Accueil.jsp'"/>
+		<input id="button_menu_left" type="button" value="Accueil" onclick="self.location.href='Accueil.jsp'"/>
 		<% if(session.getAttribute("login") == null){ %>
-			<input id="button_deco" type="button" value="Connexion" onclick="self.location.href='Login.jsp'"/>
+			<input id="button_menu_right" type="button" value="Connexion" onclick="self.location.href='Login.jsp'"/>
 		<% } else{ %>
-			<input id="button_deco" type="submit" value="Déconnexion" onclick="self.location.href = 'Logout.java'"/>
+			<input id="button_menu_right" type="submit" value="Déconnexion" onclick="self.location.href = 'Logout.java'"/>
 			<div id="msg_co">
 				Bonjour <%= session.getAttribute("login") %>
 			</div>
@@ -87,7 +88,7 @@ String GETlogin = "";
                   <input type="password" id="password2" name="password2" required="true"><br>
                   
                   <br>
-                  <input type="submit" value="S'incrire">
+                  <input type="submit" value="S'incrire" id="ins">
               </form>
           </fieldset>
           

@@ -39,7 +39,7 @@
 		               <input type="text" name="login" id="login" required="true"><br>
 		               <label for="password">Mot de passe:</label>
 		               <input type="password" id="password" name="password" required="true"><br><br>
-		               <input type="submit" value="Login ">
+		               <input type="submit" value="Login " id="log">
 		           </form>
 		        </br>   
 	            <a href="register.jsp">Pas encore inscrit ? C'est ici !</a>

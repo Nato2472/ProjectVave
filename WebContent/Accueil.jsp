@@ -10,6 +10,7 @@
 <%@page import="Model.Evaluation" %>
 <%@page import="Manager.LieuManager" %>
 <%@page import="Model.Lieu" %>
+<%@page import="Manager.UserManager" %>
 
 <%
 	// serveur IP: 217.128.202.143
@@ -27,8 +28,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
+		<meta name="viewport" content="width=device-width"/>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<link rel="stylesheet" type="text/css" href="Accueil.css"/>
+		<link rel="stylesheet" type="text/css" href="Commun.css"/>
+		<link rel="stylesheet" type="text/css" href="Eval.css"/>
 		<title>Accueil</title>
 	</head>
 	<body>
@@ -37,20 +40,20 @@
 				<img/>
 			</div>
 			<span id="menu_button">
-				<input id="button_cate" type="button" value="Catégorie" onclick="self.location.href='Categorie.jsp?listcate=aff'"/>
-				<input id="button_lieu" type="button" value="Lieu" onclick="self.location.href='Lieu.jsp?listlieu=aff'"/>
+				<input id="button_menu_left" type="button" value="Catégorie" onclick="self.location.href='Categorie.jsp?listcate=aff'"/>
+				<input id="button_menu_left" type="button" value="Lieu" onclick="self.location.href='Lieu.jsp?listlieu=aff'"/>
 				<% if(session.getAttribute("login") == null){ %>
-					<input id="button_deco" type="button" value="Connexion" onclick="self.location.href='Login.jsp'"/>
-					<input id="button_ins" type="button" value="Inscription" onclick="self.location.href = 'register.jsp'"/>
+					<input id="button_menu_right" type="button" value="Connexion" onclick="self.location.href='Login.jsp'"/>
+					<input id="button_menu_right" type="button" value="Inscription" onclick="self.location.href = 'register.jsp'"/>
 				<% } else{ %>
-					<input id="button_deco" type="submit" value="Déconnexion" onclick="self.location.href = 'Logout.java'"/>
+					<input id="button_menu_right" type="submit" value="Déconnexion" onclick="self.location.href = 'Logout.java'"/>
 					<div id="msg_co">
 						Bonjour <%= session.getAttribute("login") %>
 					</div>
 				<% }%>
 			</span>
 			<div id="content">
-				<section id="user_content">
+				<section id="info_content">
 					<b><u>Information:</u></b>
 					</br></br>
 					<% if (session.getAttribute("currentUser") != null) { %>
@@ -74,29 +77,38 @@
 					<% } %>
 				</section>
 				
-				<section id="eval_content">
+				<section id="main_content">
 						<% emanager.GetEvalLast();%>
 						<h1>Dernières Evaluations</h1>
 						<% if(session.getAttribute("login") != null){ %>
-						<button id="add_eval" onclick="self.location.href='AddCate.jsp?Cate=null'">Ajouter une évaluation</button></br>
+						<button id="add_eval" onclick="self.location.href='AddEval.jsp'">Ajouter une évaluation</button></br>
 						<% } %>
 						<hr>	
 						<% for(Evaluation e : emanager.getEvallast()){
 							eta = lmanager.GetLieuById(e.getId_eta());%>
 							<div id="eval">
-								<u><b>Etablissement:</b></u></br>
-								<%= eta.getNom() %></br> <%= eta.getAdresse() %></br> <%= eta.getCodepostal() %> <%= eta.getVille() %> </br>
-								<u>Tel:</u> <%= eta.getTelephone() %> </br><button
-TARGET=popup 
-onclick="window.open('MapBing.html?adr=<%= eta.getAdresse() %> <%= eta.getCodepostal() %> <%= eta.getVille() %>','popup','width=420,height=430,left=0,top=0,scrollbars=1')">Voir la carte</button></br>
-								<u><b>Evaluation:</b></u>
-								</br>
-								<u>Titre:</u> <%= e.getNom() %>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Note:<%= e.getNote() %>/5   &nbsp;&nbsp;&nbsp; <%= e.getDateEval() %>
-								</br>
-								<u>Objet:</u> <%= e.getComCourt() %></br>
-								<u>Commentaire:</u></br>
-								<%= e.getComLong() %></br>
-								
+								<div id="eta">
+									<u><b>Etablissement:</b></u></br>
+									<%= eta.getNom() %></br> <%= eta.getAdresse() %></br> <%= eta.getCodepostal() %> <%= eta.getVille() %> </br>
+									<u>Tel:</u> <%= eta.getTelephone() %> </br></br>
+								</div>
+								<div id="user_eval">
+									<u><b>Evaluateur:</b></u><br>
+									<% User us = new User();
+										UserManager umanager = new UserManager();
+										us = umanager.GetUserById(e.getId_uti());%>
+										<%= us.getPseudo() %><br>
+										<%= us.getDate() %>
+								</div>
+								<div id="carac_eval">
+									<u><b>Evaluation:</b></u>
+									</br>
+									<u>Titre:</u> <%= e.getNom() %>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Note:<%= e.getNote() %>/5   &nbsp;&nbsp;&nbsp; <%= e.getDateEval() %>
+									</br>
+									<u>Objet:</u> <%= e.getComCourt() %></br>
+									<u>Commentaire:</u></br>
+									<%= e.getComLong() %></br>
+								</div>
 							</div>
 							</br></br>
 						<% } %>

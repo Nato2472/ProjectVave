@@ -25,6 +25,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<link rel="stylesheet" type="text/css" href="Commun.css"/>
 		<link rel="stylesheet" type="text/css" href="AddCate.css"/>
 <title>Edition d'un lieu</title>
 </head>
@@ -34,21 +35,21 @@
 			<img/>
 		</div>
 		<span id="menu_button">
-			<input id="button_cate" type="button" value="Accueil" onclick="self.location.href='Accueil.jsp'"/>
-			<input id="button_cate" type="button" value="Catégorie" onclick="self.location.href='Categorie.jsp?listcate=aff'"/>
-			<input id="button_lieu" type="button" value="Lieu" onclick="self.location.href='Lieu.jsp?listlieu=aff'"/>
+			<input id="button_menu_left" type="button" value="Accueil" onclick="self.location.href='Accueil.jsp'"/>
+			<input id="button_menu_left" type="button" value="Catégorie" onclick="self.location.href='Categorie.jsp?listcate=aff'"/>
+			<input id="button_menu_left" type="button" value="Lieu" onclick="self.location.href='Lieu.jsp?listlieu=aff'"/>
 			<% if(session.getAttribute("login") == null){ %>
-				<input id="button_deco" type="button" value="Connexion" onclick="self.location.href='Login.jsp'"/>
-				<input id="button_ins" type="button" value="Inscription" onclick="self.location.href='register.jsp'"/>
+				<input id="button_menu_right" type="button" value="Connexion" onclick="self.location.href='Login.jsp'"/>
+				<input id="button_menu_right" type="button" value="Inscription" onclick="self.location.href='register.jsp'"/>
 			<% } else{ %>
-				<input id="button_deco" type="submit" value="Déconnexion" onclick="self.location.href='Logout.java'"/>
+				<input id="button_menu_right" type="submit" value="Déconnexion" onclick="self.location.href='Logout.java'"/>
 				<div id="msg_co">
 					Bonjour <%= session.getAttribute("login") %>
 				</div>
 			<% }%>
 		</span>
 		<div id="content">
-			<section id="user_content">
+			<section id="info_content">
 				<% if (request.getParameter("Lieu").equals("null")){ %>
 					<h1>Ajout d'un lieu</h1>
 					Pour ajouter un nouveau lieu, veuillez remplir les champs.
@@ -61,7 +62,7 @@
 				<%} %>
 			</section>
 			
-			<section id="cate_content">
+			<section id="main_content">
 				<% if (request.getParameter("Lieu").equals("null")){ %>
 					<fieldset >
 						<form method="post" action="AddLieu">
