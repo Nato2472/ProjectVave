@@ -7,3 +7,7 @@ build/
 .classpath
 .classpath
 .classpath
+build/classes/Model/DatabaseHelper.class
+build/classes/Model/User.class
+build/classes/Servlet/Auth.class
+build/classes/Servlet/RegisterCheck.class

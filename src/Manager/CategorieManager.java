@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import Model.Categorie;
 import Model.DatabaseHelper;
+import Model.Lieu;
 
 public class CategorieManager {
 
@@ -61,7 +62,6 @@ public class CategorieManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("test");
 		} finally{
 			db.ConnectionClose();
 		}
@@ -82,14 +82,55 @@ public class CategorieManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("test");
 		} finally{
 			db.ConnectionClose();
 		}
 		
 		return c;
 	}
-	public boolean GetFree(String nom){
+	public Categorie GetCateById(int id){
+		String query = "SELECT Id_Cate,Nom_Cate,Descrip_Cate FROM CATEGORIE WHERE Id_Cate =" + id ;
+		ResultSet rs = null;
+		DatabaseHelper db = new DatabaseHelper();
+		Categorie c = new Categorie();
+		
+		rs = db.executeQuery(query);
+		try {
+			if(rs.next()){
+				c.setId(rs.getInt(1));
+				c.setNom(rs.getString(2));
+				c.setDescription(rs.getString(3));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			db.ConnectionClose();
+		}
+		
+		return c;
+	}
+	public int GetCateIdByNom(String nom){
+		String query = "SELECT Id_Cate,Nom_Cate,Descrip_Cate FROM CATEGORIE WHERE Nom_Cate ='" + nom + "'";
+		ResultSet rs = null;
+		DatabaseHelper db = new DatabaseHelper();
+		Categorie c = new Categorie();
+		
+		rs = db.executeQuery(query);
+		try {
+			if(rs.next()){
+				c.setId(rs.getInt(1));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			db.ConnectionClose();
+		}
+		
+		return c.getId();
+	}
+	public boolean GetFreeForName(String nom){
 		String query = "SELECT count(Nom_Cate) FROM CATEGORIE WHERE Nom_Cate ='" + nom + "'";
 		ResultSet rs = null;
 		DatabaseHelper db = new DatabaseHelper();
@@ -109,10 +150,29 @@ public class CategorieManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("test");
 		} finally{
 			db.ConnectionClose();
 		}
+		if (nom.equals("null")){
+			val = false;
+		}
 		return val;
+	}
+	public boolean GetFree(Categorie c){
+		boolean valid = false;
+		this.GetListeCate();
+		
+		for(Categorie catego: this.categories){
+			if (catego.equals(c)){
+				valid = false;
+				break;
+			} else {
+				valid = true;
+			}
+		}
+		if(c.getNom().equals("null")){
+			valid = false;
+		}
+		return valid;
 	}
 }

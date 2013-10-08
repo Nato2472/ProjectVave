@@ -9,22 +9,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.Session;
-
-import Model.Categorie;
+import sun.security.jca.GetInstance.Instance;
 import Manager.CategorieManager;
+import Manager.LieuManager;
+import Model.Lieu;
 
 /**
- * Servlet implementation class Add
+ * Servlet implementation class AddLieu
  */
-@WebServlet("/Add")
-public class Add extends HttpServlet {
+@WebServlet("/AddLieu")
+public class AddLieu extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Add() {
+    public AddLieu() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,24 +40,33 @@ public class Add extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		Categorie c = new Categorie();
+		LieuManager lmanager = new LieuManager();
 		CategorieManager cmanager = new CategorieManager();
+		HttpSession session = request.getSession();
+		Lieu l = new Lieu();
+		boolean valid = true;
+	
+		l.setNom((String) request.getParameter("NomLieu"));
+		l.setAdresse((String) request.getParameter("Adr"));
+		try{
+			l.setCodepostal(Integer.parseInt(request.getParameter("CodePost")));
+		}catch (Exception e){
+			session.setAttribute("AjoutCP", "Error");
+			valid = false;
+		}
+		l.setId_cate(cmanager.GetCateIdByNom(request.getParameter("Cate")));
+		l.setTelephone((String) request.getParameter("Tel"));
+		l.setVille((String) request.getParameter("Ville"));
 		
-		c.setDescription((String) request.getParameter("descrip"));
-		c.setNom((String) request.getParameter("NomCate"));
-		
-		if ( cmanager.GetFreeForName(c.getNom())){
-			cmanager.AddCate(c);
-			request.getRequestDispatcher("/Categorie.jsp?listcate=aff").forward(
+		if ( lmanager.GetFree(l) & valid){
+			lmanager.AddLieu(l);
+			request.getRequestDispatcher("/Lieu.jsp?listlieu=aff").forward(
 					request, response);
 		} else {
-			HttpSession session = request.getSession();
-			session.setAttribute("AjoutCate", "Error");
-			request.getRequestDispatcher("/AddCate.jsp?Cate=null").forward(
+			session.setAttribute("AjoutLieu", "Error");
+			request.getRequestDispatcher("/AddLieu.jsp?Lieu=null").forward(
 					request, response);
 		}
-		
 	}
 
 }

@@ -68,6 +68,7 @@ public class Lieu {
 		this.telephone = telephone;
 		this.id_cate = id_cate;
 	}
+<<<<<<< HEAD
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -108,6 +109,15 @@ public class Lieu {
 		} else if (!ville.equals(other.ville))
 			return false;
 		return true;
-		}
+=======
+	public String getNom() {
+		return nom;
+	}
+	public void setNom(String nom) {
+		this.nom = nom;
+>>>>>>> e7bddde787706a170254408ee4ee1b07751908a4
+	}
+
+	
 	
 }

@@ -49,7 +49,7 @@ public class Modify extends HttpServlet {
 		c.setNom(request.getParameter("NomCate"));
 		c.setId((Integer) session.getAttribute("IdCate"));
 		
-		if ( cmanager.GetFree(c.getNom())){
+		if ( cmanager.GetFree(c)){
 			cmanager.ModifyCate(c);
 			request.getRequestDispatcher("/Categorie.jsp?listcate=aff").forward(
 					request, response);

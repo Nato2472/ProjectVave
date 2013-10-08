@@ -13,30 +13,38 @@
 <%@page import="java.util.ArrayList"%>
 
 <%
-	String listcate = request.getParameter("listcate");
-	String cateaff = request.getParameter("descrip");
+	String listlieu = request.getParameter("listlieu");
+	String lieuaff = request.getParameter("descrip");
 	CategorieManager cmanager = new CategorieManager();
 	EvalManager emanager = new EvalManager();
-	Categorie cate = new Categorie();
+	Lieu lieu = new Lieu();
 	LieuManager lmanager = new LieuManager();
 	Lieu eta = new Lieu();
 	List<Evaluation> evalcate = new ArrayList<Evaluation>();
 
 	String ajout = "Error";
-	if( ajout.equals(session.getAttribute("AjoutCate"))){ %>
+	if( ajout.equals(session.getAttribute("AjoutLieu")) & ajout.equals(session.getAttribute("AjoutCP")) == false){ %>
 		<script type="text/javascript">
-		alert("Vous avez entré un nom de catégorie déjà existant! Veuillez recommencer!");
+			alert("Vous avez entré un nom de catégorie déjà existant! Veuillez recommencer!");
 		</script> <%
 		ajout = null;
-		session.setAttribute("AjoutCate", "Valid");
+		session.setAttribute("AjoutLieu", "Valid");
 	}
+	if( ajout.equals(session.getAttribute("AjoutLieu")) & ajout.equals(session.getAttribute("AjoutCP"))){ %>
+	<script type="text/javascript">
+		alert("Vous avez entré un code postal non valid!");
+	</script> <%
+	ajout = null;
+	session.setAttribute("AjoutLieu", "Valid");
+	session.setAttribute("AjoutCP", "Valid" );
+}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<link rel="stylesheet" type="text/css" href="Categorie.css"/>
-	<title>Catégorie</title>
+	<title>Lieu</title>
 </head>
 	<body>
 		<header>
@@ -45,7 +53,7 @@
 			</div>
 			<span id="menu_button">
 				<input id="button_cate" type="button" value="Accueil" onclick="self.location.href='Accueil.jsp'"/>
-				<input id="button_lieu" type="button" value="Lieu" onclick="self.location.href='Lieu.jsp?listlieu=aff'"/>
+				<input id="button_lieu" type="button" value="Catégorie" onclick="self.location.href='Categorie.jsp?listcate=aff'"/>
 				<% if(session.getAttribute("login") == null){ %>
 					<input id="button_deco" type="button" value="Connexion" onclick="self.location.href='Login.jsp'"/>
 					<input id="button_ins" type="button" value="Inscription" onclick="self.location.href = 'register.jsp'"/>
@@ -60,43 +68,56 @@
 				<section id="cate_content">
 					<b><u>Information:</u></b>
 					</br></br>
-						<%if (listcate.equals("aff")){ %>
-							<i>Cliquez sur une catégorie pour afficher ses informations</i>
+						<%if (listlieu.equals("aff")){ %>
+						
+							<i>Cliquez sur unlieu pour afficher ses informations</i>
+							
 						<% } else { %>
-							<% cate = cmanager.GetCateByNom(cateaff);%>
-							<b><u>Nom:</u></b>
-							</br>
-							<%= cate.getNom() %>
-							</br></br>
-							<b><u>Description:</u></b>
-							</br>
-							<%= cate.getDescription() %>
-							</br></br>
+						
+							<!-- l'affichage du descriptif d'un lieu -->
+							<% lieu = lmanager.GetLieuByNom(lieuaff);%>
+							
+							<b><%= lieu.getNom() %></b>
+							<br><br>
+							Adresse:<br><%= lieu.getAdresse() %> <%= lieu.getCodepostal() %> <%= lieu.getVille() %>
+							<br><br>
+							Tel: <%= lieu.getTelephone() %>
+							<br><br>
+							<% Categorie cat = new Categorie();
+								cat = cmanager.GetCateById(lieu.getId_cate());%>
+							Catégorie: <%= cat.getNom() %>
+							<br><br>
+							
+							<!--  fin de l'affichage du descriptif du lieu -->
+							<!--  Redirection vers la page de modification du lieu -->
 							<% if(session.getAttribute("login") != null){ %>
-								<a href="AddCate.jsp?Cate=<%= cate.getNom() %>"><i>Modifier la catégorie</i></a>
+								<a href="AddLieu.jsp?Lieu=<%= lieu.getNom() %>"><i>Modifier le lieu</i></a>
 							<%} %>
 						<% } %>
 				</section>
 				
 				<section id="eval_content">
-					<% listcate = request.getParameter("listcate");
-						if (listcate.equals("aff")){ 
-							cmanager.GetListeCate();
+					<% listlieu = request.getParameter("listlieu");
+						// Affichage de la liste des lieux
+						if (listlieu.equals("aff")){ 
+							lmanager.GetListeLieu();
 							
-							%> <h1> Liste des Catégories</h1>
+							%> <h1> Liste des Lieux</h1>
 								
 								<% if(session.getAttribute("login") != null){ %>
-								<button id="add_eval" onclick="self.location.href='AddCate.jsp?Cate=null'">Ajouter une catégorie</button></br><% } %><hr> <%
-							for ( Categorie c : cmanager.getCategories()){ %>
-								<a href='Categorie.jsp?listcate=cate&descrip=<%= c.getNom() %>'><li><%= c.getNom() %></li></a>
+								<button id="add_eval" onclick="self.location.href='AddLieu.jsp?Lieu=null'">Ajouter un lieu</button></br><% } %><hr> <%
+							for ( Lieu l : lmanager.getLieux()){
+								Categorie catego = new Categorie();
+								catego = cmanager.GetCateById(l.getId_cate()); %>
+								<a href='Lieu.jsp?listlieu=lieu&descrip=<%= l.getNom() %>'><li><%= l.getNom() %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Catégorie: <%= catego.getNom() %></li></a>
 							<%}%>
 						
 					<% }else{ %>
-						<% emanager.GetListEvalByCate(cate);%> 
-							<h1>Liste des Evaluations</h1><a href="Categorie.jsp?listcate=aff"><i>Afficher toutes les catégories.</i></a>
+						<% emanager.GetListEvalByLieu(lieu);%> 
+							<h1>Liste des Evaluations</h1><a href="Lieu.jsp?listlieu=aff"><i>Afficher touts les lieux.</i></a>
 								<% if(session.getAttribute("login") != null){ %>
 								<button id="add_eval">Ajouter une évaluation</button></br><%} %><hr> <%
-							for(Evaluation e : emanager.getEvalcate()){
+							for(Evaluation e : emanager.getEvallieu()){
 								eta = lmanager.GetLieuById(e.getId_eta());%>
 							<div id="eval">
 								<div id="eta">
@@ -120,7 +141,6 @@
 									<u>Commentaire:</u></br>
 									<%= e.getComLong() %></br>
 								</div>
-								<!--  <iframe src="MapBing.html" width="410px" height="420px"/>  -->
  							</div>
  							</br></br>
 						<% } %>
