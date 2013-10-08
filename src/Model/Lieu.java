@@ -68,13 +68,4 @@ public class Lieu {
 		this.telephone = telephone;
 		this.id_cate = id_cate;
 	}
-	public String getNom() {
-		return nom;
-	}
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	
-	
 }
