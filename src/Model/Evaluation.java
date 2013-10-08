@@ -75,6 +75,12 @@ public class Evaluation {
 	public void setId_cate(double id_cate) {
 		this.id_cate = id_cate;
 	}
+	public double getId_Cate() {
+		return id_Cate;
+	}
+	public void setId_Cate(double id_Cate) {
+		this.id_Cate = id_Cate;
+	}
 	
 	public Evaluation() {
 		super();
@@ -83,7 +89,7 @@ public class Evaluation {
 			String comCourt, String comLong, String autreEva, double id_uti,
 			double id_eta, int id_cate) {
 		super();
-		this.id = id;
+		this.id = id;		
 		this.dateEval = dateEval;
 		this.nom = nom;
 		this.note = note;

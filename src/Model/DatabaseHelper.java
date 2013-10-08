@@ -2,6 +2,7 @@ package Model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -78,7 +79,6 @@ public class DatabaseHelper {
 			stm = connexion.createStatement();
 			rs = stm.executeQuery(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		return rs;
@@ -101,5 +101,104 @@ public class DatabaseHelper {
 		} finally{
 			this.ConnectionClose();
 		}
+	}
+	
+	/**
+	 * Update avec Prepared Statement pour Evaluation
+	 */
+	public boolean UpdateEval(Evaluation ev){
+		this.ConnectionOpen();
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = connexion.prepareStatement("INSERT INTO EVALUATION (Date_Eva,Nom_Eva,Note_Eva,Com_Cour_Eva,Com_Long_Eva,Autre_Eva,Id_Uti,Id_Eta,Id_Cate) VALUES ((?),(?),(?),(?),(?),(?),(?),(?),(?))");
+			// Creation de la date actuelle, et conversion pour la mettre dans la BDD
+			java.util.Date now = new java.util.Date();
+			java.sql.Date NOW = new java.sql.Date(now.getTime());
+			
+			pstmt.setDate(1, NOW); // date actuelle
+			pstmt.setObject(2, ev.getNomEval());
+			pstmt.setObject(3, ev.getNote());
+			pstmt.setObject(4, ev.getComCourt());
+			pstmt.setObject(5, ev.getComLong());
+			pstmt.setObject(6, ev.getAutreEva());
+			pstmt.setObject(7, ev.getId_uti());
+			pstmt.setObject(8, ev.getId_eta());
+			pstmt.setObject(9, ev.getId_Cate());
+			
+			pstmt.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.err.println("Erreur dans UpdateEval");
+			return false;
+		} finally{
+			this.ConnectionClose();
+		}
+	}
+	
+	public ResultSet QueryLogin(String login, String password){
+		this.ConnectionOpen();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = connexion.prepareStatement("SELECT Login_Uti, Prenom_Uti, Nom_Uti, Pseudo_Uti, Date_Inscrip_Uti FROM UTILISATEUR WHERE Login_Uti = ? AND Mdp_Uti= ?;");
+			pstmt.setObject(1, login);
+			pstmt.setObject(2, password);
+			
+			rs = pstmt.executeQuery();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.err.println("Erreur dans QueryLogin");
+		}
+		return rs;
+	}
+	
+	public ResultSet CheckIfExistLogin(String login, String pseudo){
+		this.ConnectionOpen();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = connexion.prepareStatement("SELECT count(Login_Uti) FROM UTILISATEUR WHERE Login_Uti = ? AND Pseudo_Uti = ?");
+			pstmt.setObject(1, login);
+			pstmt.setObject(2, pseudo);
+			
+			
+			rs = pstmt.executeQuery();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.err.println("Erreur dans QueryLogin");
+		}
+		return rs;
+	}
+	
+	public ResultSet QueryRegister(String login, String firstname, String lastname,String pseudo, String pass1){
+		this.ConnectionOpen();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = connexion.prepareStatement("INSERT INTO UTILISATEUR (Login_Uti, Prenom_Uti, Nom_Uti, Pseudo_Uti, Mdp_Uti, Date_Inscrip_Uti) VALUES (?, ?, ?, ?, ?, ?)");
+			pstmt.setObject(1, login);
+			pstmt.setObject(2, firstname);
+			pstmt.setObject(3, lastname);
+			pstmt.setObject(4, pseudo);
+			pstmt.setObject(5, pass1);
+			// Creation de la date actuelle, et conversion pour la mettre dans la BDD
+			java.util.Date now = new java.util.Date();
+			java.sql.Date NOW = new java.sql.Date(now.getTime());
+			pstmt.setDate(6, NOW); // date actuelle
+
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.err.println("Erreur dans QueryLogin");
+		}
+		return rs;
 	}
 }

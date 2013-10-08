@@ -23,8 +23,15 @@
   }
   function geocodeRequest() 
   { 
+<<<<<<< HEAD
     createSearchManager();
+    var f = extractUrlParams()
+    
+    var where = f[1] + 'france'; 
+=======
+    createSearchManager(); 
     var where = 'france'; 
+>>>>>>> e7bddde787706a170254408ee4ee1b07751908a4
     var userData = { name: 'Maps Test User', id: 'XYZ' }; 
     var request = 
     { 
@@ -37,6 +44,7 @@
     }; 
     searchManager.geocode(request); 
   } 
+<<<<<<< HEAD
   function extractUrlParams(){	
 		var t = location.search.substring(1).split('&');
 		var f = [];
@@ -46,6 +54,8 @@
 		}
 		return f;
 	}
+=======
+>>>>>>> e7bddde787706a170254408ee4ee1b07751908a4
   function onGeocodeSuccess(result, userData) 
   { 
     if (result) { 
