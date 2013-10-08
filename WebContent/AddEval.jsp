@@ -112,7 +112,7 @@ if (session.getAttribute("currentUser") != null) {
 				<% } else { %>
 
 
-<fieldset>
+				<fieldset>
 		           <form name="formulaire" action="AddEvalServlet" method="post">
 		               <label for="nameEval">Titre pour votre évaluation:</label>
 		               <input type="text" name="nameEval" id="nameEval" required="true"><br>
@@ -140,7 +140,7 @@ if (session.getAttribute("currentUser") != null) {
 	       </fieldset>
        </section>
 	</div>
-<% } else { 
+<% }} else { 
 	response.sendRedirect("Login.jsp");
 }
 %>
