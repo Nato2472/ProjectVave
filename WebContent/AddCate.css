@@ -1,7 +1,41 @@
 @CHARSET "ISO-8859-1";
 
-#descrip{
-	height: 100px;
-	width:500px;
-		
+
+
+@media all and (max-device-width: 1024px)
+{
+	#descrip{
+		height: 100px;
+		width:500px;
+	}
+	
+	#Descrip, #Nom{
+		font-size: 35px;
+	}
+	
+	#NomCate{
+		width: 300px;
+		height: 50px;
+		font-size: 25px;
+	}
+	
+	#descrip{
+		width: 500px;
+		height: 200px;
+		font-size: 25px;
+	}
+	
+	#add{
+		width: 225px;
+		height: 75px;
+		font-size: 25px;
+	}
+}
+
+@media all and (min-device-width: 1025px)
+{
+	#descrip{
+		height: 100px;
+		width:500px;
+	}
 }

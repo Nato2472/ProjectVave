@@ -40,7 +40,7 @@
 				<% } else{ %>
 					<input id="button_menu_right" type="submit" value="Déconnexion" onclick="self.location.href = 'Logout.java'"/>
 					<div id="msg_co">
-						Bonjour <%= session.getAttribute("login") %>
+						Bonjour <%= session.getAttribute("login") %>, &nbsp;
 					</div>
 				<% }%>
 			</span>
@@ -62,14 +62,14 @@
 					<% if (request.getParameter("Cate").equals("null")){ %>
 						<fieldset >
 							<form method="post" action="Add">
-								<label for="NomCate">Nom de la catégorie:</label>
+								<label id="Nom" for="NomCate">Nom de la catégorie:</label>
 				                <input type="text" name="NomCate" id="NomCate" required="true">
-				                <br>
-				                <label for="descrip">Description:</label>
+				                <br><br>
+				                <label id="Descrip" for="descrip">Description:</label>
 				                </br>
 				                <textarea id="descrip" name="descrip" required="true" ></textarea>
 				                <br><br>
-				                <input type="submit" value="Ajouter">
+				                <input type="submit" value="Ajouter" id="add">
 							</form>
 						</fieldset>
 					<% }else{ 

@@ -20,7 +20,9 @@
 	#msg_co{
 		margin-top: 15px;
 		text-align: right;
+		vertical-align: center;
 		float: right;
+		font-size: 35px;
 	}
 	
 	#button_menu_right{
@@ -66,7 +68,7 @@
 		background-color: #f0f0f0;
 		display: inline-block;
 		left: 275px;
-		right: 100px;
+		right: 50px;
 		top: 155px;
 		bottom: 10px;
 		min-width: 600px;
@@ -154,4 +156,21 @@
 		min-height: 530px;
 		min-width: 850px;
 	}
+}
+
+
+a { /* Les liens qui ne sont pas sous le curseur. */
+	color: #000000;
+	text-decoration:none;
+	font-family:Arial,Verdana;
+}
+a:hoover { /* Les liens lorsque le curseur est dessus. */
+	color: #000000;
+	text-decoration:none;
+	font-family:Arial,Verdana;
+}
+a:visited { /* Les liens visités. */
+	color: #000000;
+	text-decoration:none;
+	font-family:Arial,Verdana;
 }

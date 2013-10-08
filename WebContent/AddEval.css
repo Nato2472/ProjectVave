@@ -1,0 +1,55 @@
+@CHARSET "ISO-8859-1";
+
+@media all and (max-device-width: 1024px)
+{
+	#texteva{
+		font-size: 35px;
+	}
+	
+	#comboBoxLieu, #add{
+		width: 200px;
+		height: 50px;
+		font-size: 35px;
+	}
+	
+	#button_lieu{
+		width: 500px;
+		height: 50px;
+		font-size: 35px;
+	}
+	
+	#nameEval{
+		width: 300px;
+		height: 50px;
+		font-size: 35px;
+		
+	}
+	
+	#noteEval{
+		width: 100px;
+		height: 50px;
+		font-size: 35px;
+	
+	}
+	
+	#comCourtEval{
+		width: 500px;
+		height: 50px;
+		font-size: 35px;
+	
+	}
+	
+	#comLongEval{
+		width: 500px;
+		height: 200px;
+		font-size: 35px;
+	
+	}
+	
+	#autreComEval{
+		width: 400px;
+		height: 100px;
+		font-size: 35px;
+	
+	}
+}

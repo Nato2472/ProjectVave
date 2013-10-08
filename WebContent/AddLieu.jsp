@@ -26,7 +26,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<link rel="stylesheet" type="text/css" href="Commun.css"/>
-		<link rel="stylesheet" type="text/css" href="AddCate.css"/>
+		<link rel="stylesheet" type="text/css" href="AddLieu.css"/>
 <title>Edition d'un lieu</title>
 </head>
 <body>
@@ -44,7 +44,7 @@
 			<% } else{ %>
 				<input id="button_menu_right" type="submit" value="Déconnexion" onclick="self.location.href='Logout.java'"/>
 				<div id="msg_co">
-					Bonjour <%= session.getAttribute("login") %>
+					Bonjour <%= session.getAttribute("login") %>, &nbsp;
 				</div>
 			<% }%>
 		</span>
@@ -64,31 +64,31 @@
 			
 			<section id="main_content">
 				<% if (request.getParameter("Lieu").equals("null")){ %>
-					<fieldset >
+					<fieldset id="field">
 						<form method="post" action="AddLieu">
-							<label for="NomLieu">Nom du lieu:</label>
+							<label id="textlieu" for="NomLieu">Nom du lieu:</label>
 			                <input type="text" name="NomLieu" id="NomLieu" required="true">
-			                <br>
-			                <label for="Adr">Adresse:</label>
+			                <br><br>
+			                <label id="textlieu" for="Adr">Adresse:</label>
 			                <input type="text" name="Adr" id="Adr" required="true">
-			                <br>
-			                <label for="CodePost">Code Postal:</label>
+			                <br><br>
+			                <label id="textlieu" for="CodePost">Code Postal:</label>
 			                <input type="text" name="CodePost" id="CodePost" required="true">
-			                <br>
-			                <label for="Ville">Ville:</label>
+			                <br><br>
+			                <label id="textlieu" for="Ville">Ville:</label>
 			                <input type="text" name="Ville" id="Ville" required="true">
-			                <br>
-			                <label for="Tel">Telephone:</label>
+			                <br><br>
+			                <label id="textlieu" for="Tel">Telephone:</label>
 			                <input type="text" name="Tel" id="Tel" required="true">
-			                <br>
-			                <label for="Cate">Catégorie:</label>
+			                <br><br>
+			                <label id="textlieu" for="Cate">Catégorie:</label>
 			                <select nom="Cate" id="Cate" required="true" >
 			                <% for(Categorie c : cmanager.getCategories()){%>
 			                	<option value="<%= c.getNom() %>"><%= c.getNom() %></option>
 			                <% } %>
 			                </select>
 			                <br><br>
-			                <input type="submit" value="Ajouter">
+			                <input type="submit" value="Ajouter" id="add">
 						</form>
 					</fieldset>
 				<% }else{ 

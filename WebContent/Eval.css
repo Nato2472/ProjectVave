@@ -63,4 +63,13 @@
 		margin-left: 100px;
 		
 	}
+	
+	#user_eval{
+		float: right;
+		display: inline-block;
+	}
+	
+	#eta{
+		display: inline-block;
+	}
 }
