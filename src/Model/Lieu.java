@@ -108,8 +108,6 @@ public class Lieu {
 		} else if (!ville.equals(other.ville))
 			return false;
 		return true;
-	}
-
-	
+		}
 	
 }

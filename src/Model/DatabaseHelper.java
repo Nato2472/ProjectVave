@@ -96,7 +96,6 @@ public class DatabaseHelper {
 			stm = connexion.createStatement();
 			stm.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally{
 			this.ConnectionClose();
@@ -117,14 +116,14 @@ public class DatabaseHelper {
 			java.sql.Date NOW = new java.sql.Date(now.getTime());
 			
 			pstmt.setDate(1, NOW); // date actuelle
-			pstmt.setObject(2, ev.getNomEval());
+			pstmt.setObject(2, ev.getNom());
 			pstmt.setObject(3, ev.getNote());
 			pstmt.setObject(4, ev.getComCourt());
 			pstmt.setObject(5, ev.getComLong());
 			pstmt.setObject(6, ev.getAutreEva());
 			pstmt.setObject(7, ev.getId_uti());
 			pstmt.setObject(8, ev.getId_eta());
-			pstmt.setObject(9, ev.getId_Cate());
+			pstmt.setObject(9, ev.getId_cate());
 			
 			pstmt.executeUpdate();
 			return true;

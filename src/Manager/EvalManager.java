@@ -1,6 +1,5 @@
 package Manager;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -57,11 +56,8 @@ public class EvalManager {
 		DatabaseHelper db = new DatabaseHelper();
 		verif = db.UpdateEval(e);
 		db.ConnectionClose();
-			System.out.println("Ajout évaluation reussi !");
-		} else {
-			System.out.println("Echec ajout évaluation !");
 		}
-	}
+	
 	
 	
 	public void DelEval(Evaluation e){
@@ -94,7 +90,6 @@ public class EvalManager {
 				this.evaluations.add(e);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
 			db.ConnectionClose();
@@ -123,7 +118,6 @@ public class EvalManager {
 				this.evalcate.add(e);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
 			db.ConnectionClose();
@@ -182,7 +176,6 @@ public class EvalManager {
 				this.evallast.add(e);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
 			db.ConnectionClose();

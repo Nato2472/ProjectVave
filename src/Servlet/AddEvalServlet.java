@@ -92,7 +92,7 @@ public class AddEvalServlet extends HttpServlet {
 				
 				eval.setId_uti(idUser);
 				eval.setId_eta(idLieu);
-				eval.setId_Cate(idCat);
+				eval.setId_cate(idCat);
 				Emanager.AddEval(eval);
 				response.sendRedirect("AddEval.jsp?err=ok");
 				return;

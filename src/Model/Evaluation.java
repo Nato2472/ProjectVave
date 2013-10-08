@@ -75,12 +75,6 @@ public class Evaluation {
 	public void setId_cate(double id_cate) {
 		this.id_cate = id_cate;
 	}
-	public double getId_Cate() {
-		return id_Cate;
-	}
-	public void setId_Cate(double id_Cate) {
-		this.id_Cate = id_Cate;
-	}
 	
 	public Evaluation() {
 		super();
@@ -99,6 +93,16 @@ public class Evaluation {
 		this.id_uti = id_uti;
 		this.id_eta = id_eta;
 		this.id_cate = id_cate;
+	}
+	
+	public Evaluation(String nom, float note,
+			String comCourt, String comLong, String autreEva) {
+		super();
+		this.nom = nom;
+		this.note = note;
+		this.comCourt = comCourt;
+		this.comLong = comLong;
+		this.autreEva = autreEva;
 	}
 	
 }

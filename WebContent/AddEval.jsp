@@ -59,7 +59,7 @@ if (request.getParameter("err") != null) {
 	               <input type="text" name="comCourtEval" id="comCourtEval" required="true" value=<%=request.getParameter("comCourtEval")%>><br>
 	               
 	               <label for="comLongEval">Commentaire détaillé:</label>
-	               <input type="text" id="comLongEval" name="comLongEval" required="true" value=<%=request.getParameter("comLongEval")%>><br>
+	               <input type="text" id="comLongEval" name="comLongEval" required="true" size=100 value=<%=request.getParameter("comLongEval")%>><br>
 	               
 	               <label for="autreComEval">Un dernier détail ?</label>
 	               <input type="text" name="autreConEval" id="autreComEval" value=<%=request.getParameter("autreComEval")%>><br>
@@ -69,7 +69,7 @@ if (request.getParameter("err") != null) {
 	               <% for (int i = 0; i < ListeLieu.size() ; i++) { %>
 					<option value="<%=ListeLieu.get(i).getId()%>"><%=ListeLieu.get(i).getNom() %></option> 
 					<% } %>
-					</select>
+					</select><input id="button_lieu" type="button" value="AddLieu" onclick="self.location.href='AddLieu.jsp?Lieu=null'"/>
 	               
 	               
 	               <% //if (session.getAttribute("currentUser") != null) { idUser = u.getId();%>
@@ -92,9 +92,8 @@ if (request.getParameter("err") != null) {
 		               <label for="comCourtEval">Commentaire court (résumé):</label>
 		               <input type="text" name="comCourtEval" id="comCourtEval" required="true"><br>
 		               
-		               <label for="comLongEval">Commentaire détaillé:</label>
-		               <input type="text" id="comLongEval" name="comLongEval" required="true"><br>
-		               
+		               <label for="comLongEval">Commentaire détaillé:</label><br>
+		               <textarea rows="4" cols="50" id="comLongEval" name="comLongEval" required="true">test</textarea><br>
 		               <label for="autreComEval">Un dernier détail ?</label>
 		               <input type="text" name="autreComEval" id="autreComEval"><br>
 		               
