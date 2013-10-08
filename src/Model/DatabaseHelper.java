@@ -38,7 +38,6 @@ public class DatabaseHelper {
 
 		} catch (ClassNotFoundException e) {
 			System.out.println("Impossible de trouver le driver!");
-			System.exit(-1);
 		}
 
 		connexion = null;

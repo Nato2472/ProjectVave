@@ -24,9 +24,11 @@
 
 	String ajout = "Error";
 	if( ajout.equals(session.getAttribute("AjoutCate"))){ %>
-	<script type="text/javascript">
-	alert("Vous avez entré un nom de catégorie déjà existant! Veuillez recommencer!");
-	</script> <%
+		<script type="text/javascript">
+		alert("Vous avez entré un nom de catégorie déjà existant! Veuillez recommencer!");
+		</script> <%
+		ajout = null;
+		session.setAttribute("AjoutCate", "Valid");
 	}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -43,7 +45,7 @@
 			</div>
 			<span id="menu_button">
 				<input id="button_cate" type="button" value="Accueil" onclick="self.location.href='Accueil.jsp'"/>
-				<input id="button_lieu" type="button" value="Lieu" onclick="self.location.href='Error.html'"/>
+				<input id="button_lieu" type="button" value="Lieu" onclick="self.location.href='Lieu.jsp?listlieu=aff'"/>
 				<% if(session.getAttribute("login") == null){ %>
 					<input id="button_deco" type="button" value="Connexion" onclick="self.location.href='Login.jsp'"/>
 					<input id="button_ins" type="button" value="Inscription" onclick="self.location.href = 'register.jsp'"/>
@@ -70,7 +72,9 @@
 							</br>
 							<%= cate.getDescription() %>
 							</br></br>
-							<a href="AddCate.jsp?Cate=<%= cate.getNom() %>"><i>Modifier la catégorie</i></a>
+							<% if(session.getAttribute("login") != null){ %>
+								<a href="AddCate.jsp?Cate=<%= cate.getNom() %>"><i>Modifier la catégorie</i></a>
+							<%} %>
 						<% } %>
 				</section>
 				
@@ -79,7 +83,7 @@
 						if (listcate.equals("aff")){ 
 							cmanager.GetListeCate();
 							
-							%> <h1> Liste des Catégorie</h1>
+							%> <h1> Liste des Catégories</h1>
 								
 								<% if(session.getAttribute("login") != null){ %>
 								<button id="add_eval" onclick="self.location.href='AddCate.jsp?Cate=null'">Ajouter une catégorie</button></br><% } %><hr> <%
@@ -116,6 +120,7 @@
 									<u>Commentaire:</u></br>
 									<%= e.getComLong() %></br>
 								</div>
+								<!--  <iframe src="MapBing.html" width="410px" height="420px"/>  -->
  							</div>
  							</br></br>
 						<% } %>

@@ -38,7 +38,7 @@
 			</div>
 			<span id="menu_button">
 				<input id="button_cate" type="button" value="Catégorie" onclick="self.location.href='Categorie.jsp?listcate=aff'"/>
-				<input id="button_lieu" type="button" value="Lieu" onclick="self.location.href='Error.html'"/>
+				<input id="button_lieu" type="button" value="Lieu" onclick="self.location.href='Lieu.jsp?listlieu=aff'"/>
 				<% if(session.getAttribute("login") == null){ %>
 					<input id="button_deco" type="button" value="Connexion" onclick="self.location.href='Login.jsp'"/>
 					<input id="button_ins" type="button" value="Inscription" onclick="self.location.href = 'register.jsp'"/>
@@ -86,7 +86,9 @@
 							<div id="eval">
 								<u><b>Etablissement:</b></u></br>
 								<%= eta.getNom() %></br> <%= eta.getAdresse() %></br> <%= eta.getCodepostal() %> <%= eta.getVille() %> </br>
-								<u>Tel:</u> <%= eta.getTelephone() %> </br></br>
+								<u>Tel:</u> <%= eta.getTelephone() %> </br><button
+TARGET=popup 
+onclick="window.open('MapBing.html?adr=<%= eta.getAdresse() %> <%= eta.getCodepostal() %> <%= eta.getVille() %>','popup','width=420,height=430,left=0,top=0,scrollbars=1')">Voir la carte</button></br>
 								<u><b>Evaluation:</b></u>
 								</br>
 								<u>Titre:</u> <%= e.getNom() %>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Note:<%= e.getNote() %>/5   &nbsp;&nbsp;&nbsp; <%= e.getDateEval() %>

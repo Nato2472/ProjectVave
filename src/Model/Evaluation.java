@@ -13,7 +13,7 @@ public class Evaluation {
 	private String autreEva = null;
 	private double id_uti = 0;
 	private double id_eta = 0;
-	private int id_cate = 0;
+	private double id_cate = 0;
 	
 	public double getId() {
 		return id;
@@ -69,10 +69,10 @@ public class Evaluation {
 	public void setId_eta(double id_eta) {
 		this.id_eta = id_eta;
 	}
-	public int getId_cate() {
+	public double getId_cate() {
 		return id_cate;
 	}
-	public void setId_cate(int id_cate) {
+	public void setId_cate(double id_cate) {
 		this.id_cate = id_cate;
 	}
 	

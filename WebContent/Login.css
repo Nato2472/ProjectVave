@@ -1,43 +1,5 @@
 @CHARSET "ISO-8859-1";
 
-#button_cate, #button_lieu{
-	border:solid;
-	border-style: solid;
-	border-color: #EEEEEE;
-	vertical-align: center;
-	margin-top: 15px;
-}
-
-#button_ins{
-	border:solid;
-	border-style: solid;
-	border-color: #EEEEEE;
-	vertical-align: center;
-	margin-top: 15px;
-	text-align: right;
-	float: right;
-}
-
-#logo{
-	background-color: #8800FF;
-	padding: 15px;
-}
-
-#content{
-	margin-top: 25px;
-	min-height: 850px;
-	min-width: 530px;
-}
-
-body{
-	margin-left: 100px;
-	margin-right: 100px;
-	margin-top: 10 px;
-	margin-bottom: 10px;
-	min-height: 530px;
-	min-width: 1240px;
-}
-
 #texte_co{
 	display: inline-block;
 	float: left;

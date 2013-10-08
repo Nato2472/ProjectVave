@@ -23,13 +23,21 @@
 	List<Evaluation> evalcate = new ArrayList<Evaluation>();
 
 	String ajout = "Error";
-	if( ajout.equals(session.getAttribute("AjoutLieu"))){ %>
+	if( ajout.equals(session.getAttribute("AjoutLieu")) & ajout.equals(session.getAttribute("AjoutCP")) == false){ %>
 		<script type="text/javascript">
 			alert("Vous avez entré un nom de catégorie déjà existant! Veuillez recommencer!");
 		</script> <%
 		ajout = null;
 		session.setAttribute("AjoutLieu", "Valid");
 	}
+	if( ajout.equals(session.getAttribute("AjoutLieu")) & ajout.equals(session.getAttribute("AjoutCP"))){ %>
+	<script type="text/javascript">
+		alert("Vous avez entré un code postal non valid!");
+	</script> <%
+	ajout = null;
+	session.setAttribute("AjoutLieu", "Valid");
+	session.setAttribute("AjoutCP", "Valid" );
+}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -69,23 +77,22 @@
 							<!-- l'affichage du descriptif d'un lieu -->
 							<% lieu = lmanager.GetLieuByNom(lieuaff);%>
 							
-							<%= lieu.getNom() %>
-							</br>
-							Adresse: <%= lieu.getAdresse() %> <%= lieu.getCodepostal() %> <%= lieu.getVille() %>
-							</br>
+							<b><%= lieu.getNom() %></b>
+							<br><br>
+							Adresse:<br><%= lieu.getAdresse() %> <%= lieu.getCodepostal() %> <%= lieu.getVille() %>
+							<br><br>
 							Tel: <%= lieu.getTelephone() %>
-							</br>
+							<br><br>
 							<% Categorie cat = new Categorie();
 								cat = cmanager.GetCateById(lieu.getId_cate());%>
 							Catégorie: <%= cat.getNom() %>
-							</br></br>
-							
-							
+							<br><br>
 							
 							<!--  fin de l'affichage du descriptif du lieu -->
 							<!--  Redirection vers la page de modification du lieu -->
-							<a href="AddLieu.jsp?Lieu=<%= lieu.getNom() %>"><i>Modifier le lieu</i></a>
-							
+							<% if(session.getAttribute("login") != null){ %>
+								<a href="AddLieu.jsp?Lieu=<%= lieu.getNom() %>"><i>Modifier le lieu</i></a>
+							<%} %>
 						<% } %>
 				</section>
 				
@@ -136,7 +143,6 @@
 								</div>
  							</div>
  							</br></br>
- 							test
 						<% } %>
 					<%} %>
 				</section>

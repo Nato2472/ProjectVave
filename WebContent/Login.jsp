@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="Login.css"/>
+<link rel="stylesheet" type="text/css" href="Commun.css"/>
 <title>Page de connexion</title>
 </head>
 <body>
@@ -14,9 +15,9 @@
 		<img/>
 	</div>
 	<span id="menu_button">
-		<input id="button_cate" type="button" value="Accueil" onclick="self.location.href='Accueil.jsp'"/>
+		<input id="button_menu_left" type="button" value="Accueil" onclick="self.location.href='Accueil.jsp'"/>
 
-		<input id="button_ins" type="button" value="Inscription" method="post" onclick="self.location.href = 'register.jsp'"/>
+		<input id="button_menu_right" type="button" value="Inscription" method="post" onclick="self.location.href = 'register.jsp'"/>
 		
 		
 	</span>

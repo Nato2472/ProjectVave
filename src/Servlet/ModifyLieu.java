@@ -51,16 +51,15 @@ public class ModifyLieu extends HttpServlet {
 		l.setId_cate(i);
 		l.setTelephone((String) request.getParameter("Tel"));
 		l.setVille((String) request.getParameter("Ville"));
-		//l.setId((Double) session.getAttribute("IdLieu"));
-		l.setId(2.0);
+		l.setId((Double) session.getAttribute("IdLieu"));
 		
 		if ( lmanager.GetFree(l)){
 			lmanager.ModifyLieu(l);
-			request.getRequestDispatcher("/Lieu.jsp").forward(
+			request.getRequestDispatcher("/Lieu.jsp?listlieu=aff").forward(
 					request, response);
 		} else {
 			session.setAttribute("AjoutLieu", "Error");
-			request.getRequestDispatcher("/Categorie.jsp?listcate=aff").forward(
+			request.getRequestDispatcher("/Lieu.jsp?listlieu=aff").forward(
 					request, response);
 		}
 	}

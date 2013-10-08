@@ -47,7 +47,7 @@ public class Add extends HttpServlet {
 		c.setDescription((String) request.getParameter("descrip"));
 		c.setNom((String) request.getParameter("NomCate"));
 		
-		if ( cmanager.GetFree(c.getNom())){
+		if ( cmanager.GetFreeForName(c.getNom())){
 			cmanager.AddCate(c);
 			request.getRequestDispatcher("/Categorie.jsp?listcate=aff").forward(
 					request, response);
