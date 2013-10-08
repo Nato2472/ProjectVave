@@ -142,7 +142,7 @@ public class DatabaseHelper {
 		ResultSet rs = null;
 		
 		try {
-			pstmt = connexion.prepareStatement("SELECT Login_Uti, Prenom_Uti, Nom_Uti, Pseudo_Uti, Date_Inscrip_Uti FROM UTILISATEUR WHERE Login_Uti = ? AND Mdp_Uti= ?;");
+			pstmt = connexion.prepareStatement("SELECT Login_Uti, Prenom_Uti, Nom_Uti, Pseudo_Uti, Date_Inscrip_Uti ,Id_Uti FROM UTILISATEUR WHERE Login_Uti = ? AND Mdp_Uti= ?;");
 			pstmt.setObject(1, login);
 			pstmt.setObject(2, password);
 			

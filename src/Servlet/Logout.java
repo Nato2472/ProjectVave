@@ -43,7 +43,6 @@ public class Logout extends HttpServlet {
 		}
 		getServletContext().getRequestDispatcher("/Accueil.jsp").forward(
 				request, response);
-		// request.logout();
 	}
 
 	/**
