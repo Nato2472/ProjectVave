@@ -1,0 +1,84 @@
+@CHARSET "ISO-8859-1";
+
+img, table, td, blockquote, code, pre, textarea, input, iframe, object, embed, video {
+    max-width: 100%;
+}
+
+
+#button_cate, #button_lieu{
+	border:solid;
+	border-style: solid;
+	border-color: #EEEEEE;
+	vertical-align: center;
+	margin-top: 15px;
+	width: 24%;
+}
+
+#msg_co{
+	margin-top: 15px;
+	text-align: right;
+	float: right;
+}
+
+#button_deco, #button_ins{
+	border:solid;
+	border-style: solid;
+	border-color: #EEEEEE;
+	vertical-align: left;
+	margin-top: 15px;
+	width: 24%;
+}
+
+#logo{
+	background-color: #8800FF;
+	padding: 15px;
+}
+
+#content{
+	margin-top: 25px;
+	min-height: 850px;
+	max-width: 100%;
+}
+#menu_button{
+	text-align: right;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+header
+{
+    position: relative;
+}
+
+#user_content{
+	width: 100%;
+	border: 2px solid;
+	border-color: #cdcdcd;
+	padding: 5px;
+	background-color: #f0f0f0;
+	display: inline-block;
+	top: 10px;
+	bottom: 10px;
+}
+
+#eval_content{
+	position: relative;
+	border: 2px solid;
+	border-color: #cdcdcd;
+	background-color: #f0f0f0;
+	max-width: 600px;
+	min-width: 320px;
+}
+
+body{
+	margin: 0;
+	position: absolute;
+	width: 600px;
+}
+
+#bloc_page
+{
+    max-width: 900px;
+    margin: auto;
+    min-width: 320px;
+}

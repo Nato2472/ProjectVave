@@ -1,5 +1,6 @@
 package Manager;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -39,15 +40,21 @@ public class EvalManager {
 		this.evallast = new ArrayList<Evaluation>();
 	}
 	
-	public void AddEval(Evaluation e, int id_user, int id_eta){
-		String query = "INSERT INTO EVALUATION (Date_Eva,Note_Eva,Com_Cour_Eva,Com_Long_Eva,Autre_Eva,Id_Uti,Id_Eta)"
-				+" VALUES ('" + e.getDateEval() + "','" + e.getNote() + "','" + e.getComCourt() + "','" + e.getComLong() + "','"
-				+ e.getAutreEva() + "','" + id_user + "','" + id_eta + "')";
+	public void AddEval(Evaluation e){
+		// Prepared Statement obligatoire donc (malheureusement) objet Evaluation
+		// envoyé dans DatabaseManager
+		boolean verif = false;
 		
 		DatabaseHelper db = new DatabaseHelper();
-		db.executeUpdate(query);
+		verif = db.UpdateEval(e);
 		db.ConnectionClose();
+			System.out.println("Ajout évaluation reussi !");
+		} else {
+			System.out.println("Echec ajout évaluation !");
+		}
 	}
+	
+	
 	public void DelEval(Evaluation e){
 		String query = "DELETE FROM EVALUATION WHERE Id_Eva = " + e.getId();
 		
