@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Model.DatabaseHelper;
 import Model.User;
 
 /**
@@ -50,32 +51,17 @@ public class Auth extends HttpServlet {
 		String password = request.getParameter("password");
 
 
-		// /////// Vérification IDs dans BDD ///////////
-		String url = "jdbc:jtds:sqlserver://217.128.202.143:1433/Vave";
-		//String url = "jdbc:jtds:sqlserver://localhost:1433/Vave";
-		String BDDuser = "sa";
-		String BDDpassword = "Mobile2013";
-
-		Connection connexion = null;
-		PreparedStatement pstmt = null;
+		DatabaseHelper db = new DatabaseHelper();
 		ResultSet rs = null;
-		
+	
+		rs = db.QueryLogin(login, password);
+		String rsLog = null;
+		String rsPre = null;
+		String rsNom = null;
+		String rsPse = null;
+		Date rsDate = null;
 		
 		try {
-			Class.forName("net.sourceforge.jtds.jdbc.Driver");
-
-			connexion = DriverManager.getConnection(url, BDDuser, BDDpassword);
-
-			pstmt = connexion.prepareStatement("SELECT Login_Uti, Prenom_Uti, Nom_Uti, Pseudo_Uti, Date_Inscrip_Uti FROM UTILISATEUR WHERE Login_Uti = ? AND Mdp_Uti= ?;");
-			pstmt.setObject(1, login);
-			pstmt.setObject(2, password);
-			
-			rs = pstmt.executeQuery();
-			String rsLog = null;
-			String rsPre = null;
-			String rsNom = null;
-			String rsPse = null;
-			Date rsDate = null;
 			if (rs.next()) {
 				rsLog = rs.getObject(1).toString();
 				rsPre = rs.getObject(2).toString();
@@ -83,39 +69,28 @@ public class Auth extends HttpServlet {
 				rsPse = rs.getObject(4).toString();
 				rsDate = rs.getDate(5);
 			}
-
-			// je créé une session
-			if (rsLog != null) {
-				HttpSession session = request.getSession();
-				// Création du User et placement dans Session
-				User u = new User(rsNom, rsPre, rsLog, rsPse, rsDate);
-				
-				session.setAttribute("login", rsLog);
-				session.setAttribute("currentUser", u);
-				
-				getServletContext().getRequestDispatcher("/Accueil.jsp").forward(
-						request, response);
-			} else if (rsLog == null) {
-				HttpSession session = request.getSession();
-				session.setAttribute("error", "1");
-				getServletContext().getRequestDispatcher("/Login.jsp").forward(
-						request, response);
-			}
-
-		} catch (ClassNotFoundException ex) {
-			System.err.println("Impossible de trouver le driver");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			try {
-				if (connexion != null) {
-					connexion.close();
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	}
+			db.ConnectionClose();
+		}
+
+		// je créé une session
+		if (rsLog != null) {
+			HttpSession session = request.getSession();
+			// Création du User et placement dans Session
+			User u = new User(rsNom, rsPre, rsLog, rsPse, rsDate);
+			
+			session.setAttribute("login", rsLog);
+			session.setAttribute("currentUser", u);
+			
+			getServletContext().getRequestDispatcher("/Accueil.jsp").forward(
+					request, response);
+		} else if (rsLog == null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("error", "1");
+			getServletContext().getRequestDispatcher("/Login.jsp").forward(
+					request, response);
+		}
 	}
 }

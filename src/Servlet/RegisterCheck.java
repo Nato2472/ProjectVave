@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Model.DatabaseHelper;
+
 /**
  * Servlet implementation class RegisterCheck
  */
@@ -70,35 +72,12 @@ public class RegisterCheck extends HttpServlet {
 
 			if (pass1.equals(pass2)) {
 	
-				// Vérification IDs dans BDD
-				String url = "jdbc:jtds:sqlserver://217.128.202.143:1433/Vave";
-				// String url = "jdbc:jtds:sqlserver://localhost:1433/Vave";
-				String BDDuser = "sa";
-				String BDDpassword = "Mobile2013";
-	
-				Connection connexion = null;
-				PreparedStatement pstmt = null;
+				DatabaseHelper db = new DatabaseHelper();
 				ResultSet rs = null;
 				
-				try {
-					Class.forName("net.sourceforge.jtds.jdbc.Driver");
-	
-					connexion = DriverManager.getConnection(url, BDDuser, BDDpassword);
-	
-				} catch (ClassNotFoundException ex) {
-					System.err.println("Impossible de trouver le driver");
-					response.sendRedirect("register.jsp?err=err" + ValGet);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 				
 				try {
-					pstmt = connexion.prepareStatement("SELECT count(Login_Uti) FROM UTILISATEUR WHERE Login_Uti = ? AND Pseudo_Uti = ?");
-					pstmt.setObject(1, login);
-					pstmt.setObject(2, pseudo);
-					
-					
-					rs = pstmt.executeQuery();
+					rs = db.CheckIfExistLogin(login, pseudo);
 					String StrRes = null;
 					if (rs.next()) {
 						StrRes = rs.getObject(1).toString();
@@ -106,18 +85,8 @@ public class RegisterCheck extends HttpServlet {
 
 					
 					if ( StrRes.equals("0")) { // Si il y a aucune correspondance en BDD, j'inscris l'utilisateur.
-						pstmt = connexion.prepareStatement("INSERT INTO UTILISATEUR (Login_Uti, Prenom_Uti, Nom_Uti, Pseudo_Uti, Mdp_Uti, Date_Inscrip_Uti) VALUES (?, ?, ?, ?, ?, ?)");
-						pstmt.setObject(1, login);
-						pstmt.setObject(2, firstname);
-						pstmt.setObject(3, lastname);
-						pstmt.setObject(4, pseudo);
-						pstmt.setObject(5, pass1);
-						// Creation de la date actuelle, et conversion pour la mettre dans la BDD
-						java.util.Date now = new java.util.Date();
-						java.sql.Date NOW = new java.sql.Date(now.getTime());
-						pstmt.setDate(6, NOW); // date actuelle
-
-						pstmt.executeUpdate();
+						
+						db.QueryRegister(login, firstname, lastname, pseudo, pass1);
 						
 						// Inscription reussi
 						response.sendRedirect("register.jsp?reg=ok");
@@ -129,16 +98,8 @@ public class RegisterCheck extends HttpServlet {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				} finally {
-					try {
-						if (connexion != null) {
-							connexion.close();
-						}
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					db.ConnectionClose();
 				}
-				
 				
 				
 			} else {
@@ -148,15 +109,7 @@ public class RegisterCheck extends HttpServlet {
 		} else {
 			response.sendRedirect("register.jsp?err=3car" + ValGet);
 		}
-		
-		
 	}
-	
-	
-	public boolean isAlpha(String name) {
-	    return name.matches("[a-zA-Z]+");
-	}
-	
 }
 
 

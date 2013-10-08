@@ -20,7 +20,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<meta name="viewport" content="width=device-width, target-densitydpi=device-dpi"/>
-		<link rel="stylesheet" type="text/css" href="AccueilMobil.css"/>
+		<link rel="stylesheet" type="text/css" href="Accueil.css"/>
 		<title>Accueil</title>
 	</head>
 	<body>

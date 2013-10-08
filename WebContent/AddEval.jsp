@@ -20,44 +20,13 @@ if (session.getAttribute("currentUser") != null) {
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Ajout d'une évaluation</title>
-<script>
-<%
-LieuManager lm = new LieuManager();
-lm.GetListeLieu();
-ArrayList<Lieu> ListeLieu = lm.getLieux();
-%>
 
-var lieux = [];
-<% for (int i = 0; i < ListeLieu.size() ; i++) { %>
-	lieux['<%=ListeLieu.get(i).getId_cate()%>'][<%=i%>] = "" + <%=ListeLieu.get(i).getNom()%> + "";
-<% } %>
-
-
-function Remplir(value)
-{
-	var cbtofill = document.forms["formulaire"]["comboBoxLieu"];
-	
-	cbtofill.length = 1;
-	cbtofill.selectedIndex = 0;
-	
-	var nlieu = lieux[value];
-	
-	for(each in nlieu)
-	{
-		var nOption = document.createElement('option'); 
-		var nData = document.createTextNode(nlieu[each]); 
-		nOption.setAttribute('value',nlieu[each]); 
-		nOption.appendChild(nData); 
-		cbtofill.appendChild(nOption); 
-	}
-	
-}
-</script>
 </head>
 <body>
-<% CategorieManager cm = new CategorieManager();
-cm.GetListeCate();
-ArrayList<Categorie> ListeCat = cm.getLieux();
+<% LieuManager lm = new LieuManager();
+lm.GetListeLieu();
+ArrayList<Lieu> ListeLieu = lm.getLieux();
+
 
 if (request.getParameter("err") != null) {
 	String desErr = request.getParameter("err");
@@ -65,7 +34,9 @@ if (request.getParameter("err") != null) {
 		<script>alert('Les champs ne sont pas tous remplis');</script><%
 	}  else if(desErr.equals("note")) { %>
 		<script>alert('La note n\'est pas valide');</script><% 
-	} else { %>
+	}  else if(desErr.equals("ok")) { %>
+	<script>alert('Evaluation ajouté !');</script><% 
+}	 else { %>
 		<script>alert('Vous cherchez les problèmes !');</script><%
 	}
 }
@@ -94,12 +65,10 @@ if (request.getParameter("err") != null) {
 	               <input type="text" name="autreConEval" id="autreComEval" value=<%=request.getParameter("autreComEval")%>><br>
 	               
 	               <label for="lieuEval">Lieu correspondant a votre évaluation.</label>
-	               <select name="comboBoxCat" id="comboBoxCat" size="1" onChange="Remplir(this.value);"> 
-	               <% for (int i = 0; i < ListeCat.size() ; i++) { %>
-					<option value="<%=ListeCat.get(i).getId()%>"><%=ListeCat.get(i) %></option> 
+	               <select name="comboBoxLieu" id="comboBoxLieu" size="1" onChange="Remplir(this.value);"> 
+	               <% for (int i = 0; i < ListeLieu.size() ; i++) { %>
+					<option value="<%=ListeLieu.get(i).getId()%>"><%=ListeLieu.get(i).getNom() %></option> 
 					<% } %>
-					</select>
-	               <select name="comboBoxLieu" id="comboBoxLieu" size="1"> 
 					</select>
 	               
 	               
@@ -127,18 +96,15 @@ if (request.getParameter("err") != null) {
 		               <input type="text" id="comLongEval" name="comLongEval" required="true"><br>
 		               
 		               <label for="autreComEval">Un dernier détail ?</label>
-		               <input type="text" name="autreConEval" id="autreComEval"><br>
+		               <input type="text" name="autreComEval" id="autreComEval"><br>
 		               
 		               <label for="lieuEval">Lieu correspondant a votre évaluation.</label>
-		               <select name="comboBoxCat" id="comboBoxCat" size="1" onChange="Remplir(this.value);"> 
-		               <% for (int i = 0; i < ListeCat.size(); i++) {
+		               <select name="comboBoxLieu" id="comboBoxLieu" size="1" onChange="RemplirHidden(this.value);"> 
+		               <% for (int i = 0; i < ListeLieu.size(); i++) {
 		               %>
-						<option value="<%=ListeCat.get(i).getId()%>"><%=ListeCat.get(i) %></option> 
+						<option value="<%=ListeLieu.get(i).getId()%>"><%=ListeLieu.get(i).getNom() %></option> 
 						<% } %>
-						</select>
-		               <select name="comboBoxLieu" id="comboBoxLieu" size="1"> 
-						</select>
-		               
+						</select><input id="button_lieu" type="button" value="AddLieu" onclick="self.location.href='AddLieu.jsp?Lieu=null'"/>
 		               
 		               <% //if (session.getAttribute("currentUser") != null) { idUser = u.getId();%>
 		               <input type="hidden" name="idUser" id="idUser" value=15><br>

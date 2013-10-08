@@ -20,7 +20,7 @@ public class LieuManager {
 
 	@SuppressWarnings("unused")
 	public LieuManager() {
-		ArrayList<Lieu> lieux = new ArrayList<Lieu>();
+		this.lieux = new ArrayList<Lieu>();
 	}
 	
 	public void AddLieu(Lieu l){
@@ -38,7 +38,7 @@ public class LieuManager {
 		db.executeUpdate(query);
 	}	
 	public void GetListeLieu(){
-		String query = "SELECT Id_Eta,Adr_Eta,CP_Eta,Ville_Eta,Num_Tel_Eta,Id_Cate FROM ETABLISSEMENT";
+ 		String query = "SELECT Id_Eta,Nom_Eta,Adr_Eta,CP_Eta,Ville_Eta,Num_Tel_Eta,Id_Cate FROM ETABLISSEMENT";
 		ResultSet rs = null;
 		DatabaseHelper db = new DatabaseHelper();
 		
@@ -47,11 +47,12 @@ public class LieuManager {
 			while(rs.next()){
 				Lieu l = new Lieu();
 				l.setId(rs.getDouble(1));
-				l.setAdresse(rs.getString(2));
-				l.setCodepostal(rs.getInt(3));
-				l.setVille(rs.getString(4));
-				l.setTelephone(rs.getString(5));
-				l.setId_cate(rs.getInt(6));
+				l.setNom(rs.getString(2));
+				l.setAdresse(rs.getString(3));
+				l.setCodepostal(rs.getInt(4));
+				l.setVille(rs.getString(5));
+				l.setTelephone(rs.getString(6));
+				l.setId_cate(rs.getInt(7));
 				
 				
 				this.lieux.add(l);

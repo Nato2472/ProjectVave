@@ -20,7 +20,7 @@ public class CategorieManager {
 
 	@SuppressWarnings("unused")
 	public CategorieManager() {
-		ArrayList<Categorie> categories = new ArrayList<Categorie>();
+		this.categories = new ArrayList<Categorie>();
 	}
 	
 	public void AddCate(Categorie c){
@@ -50,7 +50,6 @@ public class CategorieManager {
 				c.setDescription(rs.getString(3));
 				
 				this.categories.add(c);
-				System.err.println("test erreur"); /////////////////////////////////////////////////////////////////////
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

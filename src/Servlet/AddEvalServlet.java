@@ -2,6 +2,7 @@ package Servlet;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.catalina.util.SessionConfig;
 
 import Manager.EvalManager;
+import Model.DatabaseHelper;
 import Model.Evaluation;
 
 /**
@@ -48,23 +50,18 @@ public class AddEvalServlet extends HttpServlet {
 		String comLongEval = request.getParameter("comLongEval");
 		String autreComEval = request.getParameter("autreComEval");
 		String idUserTemp = request.getParameter("idUser");
-		String comboBoxCat = request.getParameter("comboBoxCat");
 		String comboBoxLieu = request.getParameter("comboBoxLieu");
-		
-		System.err.println("comboBoxCat = " + comboBoxCat);
-		System.err.println("comboBoxLieu = " + comboBoxLieu);
-		
+	
 		Double idUser = 15.0;
 		float note = -1;
+		Double idLieu = null;
 
 		if ((nameEval.length() > 1) & (noteEval.length() > 0) & (comCourtEval.length() > 1) & (comLongEval.length() > 1) ) {
+			
 			try {
+				idLieu = Double.parseDouble(comboBoxLieu);
 				idUser = Double.parseDouble(idUserTemp); // String to Double
 				note = Float.parseFloat(noteEval); // String to Float
-				
-				
-				
-				
 			} catch (NumberFormatException n) {
 				n.printStackTrace();
 				System.err.println("idUser = " + idUser + " et note = " + note); // Verification des Parses
@@ -72,13 +69,38 @@ public class AddEvalServlet extends HttpServlet {
 				return;
 			}
 			
-			Evaluation eval = new Evaluation(nameEval, note, comCourtEval, comLongEval, autreComEval);
-			EvalManager EM = new EvalManager();
+			if ((note <= 5) & (note >= 0)) 
+			{
+				Evaluation eval = new Evaluation(nameEval, note, comCourtEval, comLongEval, autreComEval);
+				EvalManager Emanager = new EvalManager();
+				
+				
+				DatabaseHelper db = new DatabaseHelper();
+				ResultSet rs = null;
+				String query = "SELECT Id_Cate FROM ETABLISSEMENT WHERE Id_Eta=" + idLieu;
+				rs = db.executeQuery(query);
+				Double idCat = null;
+				try {
+					while(rs.next()){
+						idCat = rs.getDouble(1);
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return;
+				}
+				
+				
+				eval.setId_uti(idUser);
+				eval.setId_eta(idLieu);
+				eval.setId_Cate(idCat);
+				Emanager.AddEval(eval);
+				response.sendRedirect("AddEval.jsp?err=ok");
+				return;
+			} else {
+				response.sendRedirect("AddEval.jsp?err=note");
+				return;
+			}
 			
-			eval.setId_uti(idUser);
-			eval.setId_eta(1); // Obtenir Id_Etablissement -> Modifier le Form
-			eval.setId_Cate(1); // Obtenir Id_Categorie -> Modifier le Form
-			EM.AddEval(eval);
 			
 		} else {
 			// Erreur tout les champs ne sont pas remplis
