@@ -45,6 +45,7 @@ public class AddLieu extends HttpServlet {
 		HttpSession session = request.getSession();
 		Lieu l = new Lieu();
 		boolean valid = true;
+		int i = cmanager.GetCateIdByNom(request.getParameter("Cate"));
 	
 		l.setNom((String) request.getParameter("NomLieu"));
 		l.setAdresse((String) request.getParameter("Adr"));
@@ -54,7 +55,7 @@ public class AddLieu extends HttpServlet {
 			session.setAttribute("AjoutCP", "Error");
 			valid = false;
 		}
-		l.setId_cate(cmanager.GetCateIdByNom(request.getParameter("Cate")));
+		l.setId_cate(i);
 		l.setTelephone((String) request.getParameter("Tel"));
 		l.setVille((String) request.getParameter("Ville"));
 		
