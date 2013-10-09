@@ -55,7 +55,6 @@ public class EvalManager {
 		}
 	
 	
-	
 	public void DelEval(Evaluation e){
 		String query = "DELETE FROM EVALUATION WHERE Id_Eva = " + e.getId();
 		
@@ -63,6 +62,7 @@ public class EvalManager {
 		db.executeUpdate(query);
 		db.ConnectionClose();
 	}	
+	
 	public void GetListeEval(){
 		String query = "SELECT Id_Eva,Date_Eva,Note_Eva,Com_Cour_Eva,Com_Long_Eva,Autre_Eva,Id_Uti,Id_Eta,Id_Cate,Nom_Eva FROM EVALUATION";
 		ResultSet rs = null;
@@ -91,6 +91,7 @@ public class EvalManager {
 			db.ConnectionClose();
 		}
 	}
+	
 	public void GetListEvalByCate(Categorie c){
 		String query = "SELECT Id_Eva,Date_Eva,Note_Eva,Com_Cour_Eva,Com_Long_Eva,Autre_Eva,Id_Uti,Id_Eta,Nom_Eva FROM EVALUATION WHERE Id_Cate = " + c.getId();
 		ResultSet rs = null;
@@ -119,6 +120,7 @@ public class EvalManager {
 			db.ConnectionClose();
 		}
 	}
+	
 	public void GetListEvalByLieu(Lieu l){
 		String query = "SELECT Id_Eva,Date_Eva,Note_Eva,Com_Cour_Eva,Com_Long_Eva,Autre_Eva,Id_Uti,Id_Eta,Nom_Eva FROM EVALUATION WHERE Id_Eta = " + l.getId();
 		ResultSet rs = null;
@@ -142,12 +144,12 @@ public class EvalManager {
 				this.evallieu.add(e);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
 			db.ConnectionClose();
 		}
 	}
+	
 	public void GetEvalLast(){
 		String query = "SELECT TOP 5 Id_Eva,Date_Eva,Note_Eva,Com_Cour_Eva,Com_Long_Eva,Autre_Eva,Id_Uti,Id_Eta,Id_Cate,Nom_Eva FROM EVALUATION ORDER BY Id_Eva DESC";
 		ResultSet rs = null;

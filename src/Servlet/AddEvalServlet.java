@@ -1,7 +1,6 @@
 package Servlet;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -11,8 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.catalina.util.SessionConfig;
 
 import Manager.EvalManager;
 import Model.DatabaseHelper;
@@ -67,7 +64,7 @@ public class AddEvalServlet extends HttpServlet {
 				note = Float.parseFloat(noteEval); // String to Float
 			} catch (NumberFormatException n) {
 				n.printStackTrace();
-				System.err.println("idUser = " + u.getId() + " et note = " + note); // Verification des Parses
+				System.err.println("Erreur de parseFloat ou Double"); // Verification des Parses
 				response.sendRedirect("AddEval.jsp?err=note");
 				return;
 			}

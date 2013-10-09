@@ -34,6 +34,7 @@ public class Categorie {
 		this.nom = nom;
 		this.description = description;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

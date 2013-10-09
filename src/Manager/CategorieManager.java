@@ -83,12 +83,12 @@ public class CategorieManager {
 				this.categories.add(c);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally{
 			db.ConnectionClose();
 		}
 	}
+	
 	public Categorie GetCateByNom(String nom){
 		String query = "SELECT Id_Cate,Nom_Cate,Descrip_Cate FROM CATEGORIE WHERE Nom_Cate ='" + nom + "'";
 		ResultSet rs = null;
@@ -103,7 +103,6 @@ public class CategorieManager {
 				c.setDescription(rs.getString(3));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally{
 			db.ConnectionClose();
@@ -111,6 +110,7 @@ public class CategorieManager {
 		
 		return c;
 	}
+	
 	public Categorie GetCateById(int id){
 		String query = "SELECT Id_Cate,Nom_Cate,Descrip_Cate FROM CATEGORIE WHERE Id_Cate =" + id ;
 		ResultSet rs = null;
@@ -125,7 +125,6 @@ public class CategorieManager {
 				c.setDescription(rs.getString(3));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally{
 			db.ConnectionClose();
@@ -145,7 +144,6 @@ public class CategorieManager {
 				c.setId(rs.getInt(1));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally{
 			db.ConnectionClose();
@@ -153,6 +151,8 @@ public class CategorieManager {
 		
 		return c.getId();
 	}
+	
+	// Méthode permetant de vérifier l'existance d'une catégorie
 	public boolean GetFreeForName(String nom){
 		String query = "SELECT count(Nom_Cate) FROM CATEGORIE WHERE Nom_Cate ='" + nom + "'";
 		ResultSet rs = null;
@@ -171,7 +171,6 @@ public class CategorieManager {
 				val = false;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally{
 			db.ConnectionClose();
@@ -181,6 +180,8 @@ public class CategorieManager {
 		}
 		return val;
 	}
+	
+	
 	public boolean GetFree(Categorie c){
 		boolean valid = false;
 		this.GetListeCate();

@@ -54,7 +54,7 @@
 						<h1>Modification d'une catégorie</h1>
 						Pour modifier une catégorie, veuillez editer les champs.
 						Si le nom de la catégorie est modifié et qu'une autre catégorie porte le même nom,
-						un message d'alerte s'afficera.
+						un message d'alerte s'affichera.
 					<%} %>
 				</section>
 				
@@ -72,6 +72,7 @@
 				                <input type="submit" value="Ajouter" id="add">
 							</form>
 						</fieldset>
+						
 					<% }else{ 
 						Categorie c = new Categorie();
 						c = cmanager.GetCateByNom((String) request.getParameter("Cate"));

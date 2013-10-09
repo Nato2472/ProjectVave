@@ -39,6 +39,7 @@ public class AddLieu extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		LieuManager lmanager = new LieuManager();
 		CategorieManager cmanager = new CategorieManager();
 		HttpSession session = request.getSession();
@@ -51,6 +52,7 @@ public class AddLieu extends HttpServlet {
 	
 		l.setNom((String) request.getParameter("NomLieu"));
 		l.setAdresse((String) request.getParameter("Adr"));
+		
 		try{
 			l.setCodepostal(Integer.parseInt(request.getParameter("CodePost")));
 		}catch (Exception e){
