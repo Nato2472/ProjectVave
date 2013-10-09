@@ -53,7 +53,7 @@
 				<% } else{ %>
 					<input id="button_menu_right" type="submit" value="Déconnexion" onclick="self.location.href = 'Logout'"/>
 					<div id="msg_co">
-						Bonjour <%= session.getAttribute("login") %>
+						Bonjour <%= session.getAttribute("login") %>, &nbsp;
 					</div>
 				<% } %>
 			</span>

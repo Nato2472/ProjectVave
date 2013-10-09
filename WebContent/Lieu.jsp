@@ -64,7 +64,7 @@
 				<% } else{ %>
 					<input id="button_menu_right" type="submit" value="Déconnexion" onclick="self.location.href = 'Logout'"/>
 					<div id="msg_co">
-						Bonjour <%= session.getAttribute("login") %>
+						Bonjour <%= session.getAttribute("login") %>, &nbsp;
 					</div>
 				<% } %>
 			</span>
@@ -74,7 +74,7 @@
 					</br></br>
 						<%if (listlieu.equals("aff")){ %>
 						
-							<i>Cliquez sur unlieu pour afficher ses informations</i>
+							<i>Cliquez sur un lieu pour afficher ses informations</i>
 							
 						<% } else { %>
 						
@@ -130,11 +130,12 @@
 									<u>Tel:</u> <%= eta.getTelephone() %> </br></br>
 								</div>
 								<div id="user_eval">
-									<u><b>Evaluateur:</b></u>
-									<% User u = new User();
+									<u><b>Evaluateur:</b></u><br>
+									<% User us = new User();
 										UserManager umanager = new UserManager();
-										u = umanager.GetUserById(e.getId_uti());%>
-										<%= u.getPseudo() %>
+										us = umanager.GetUserById(e.getId_uti());%>
+										<%= us.getPseudo() %><br>
+										<%= us.getDate() %>
 								</div>
 								<div id="carac_eval">
 									<u><b>Evaluation:</b></u>
@@ -145,7 +146,7 @@
 									<u>Commentaire:</u></br>
 									<%= e.getComLong() %></br>
 								</div>
- 							</div>
+							</div>
  							</br></br>
 						<% } %>
 					<%} %>
