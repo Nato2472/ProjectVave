@@ -91,7 +91,7 @@
 									<u><b>Etablissement:</b></u></br>
 									<%= eta.getNom() %></br> <%= eta.getAdresse() %></br> <%= eta.getCodepostal() %> <%= eta.getVille() %> </br>
 									<u>Tel:</u> <%= eta.getTelephone() %> </br></br>
-								</div>
+								</div><button TARGET=popup onclick="window.open('MapBing.jsp?adr=<%= eta.getAdresse() %> <%= eta.getCodepostal() %> <%= eta.getVille() %>','popup','width=420,height=430,left=0,top=0,scrollbars=1')">Voir la carte</button>
 								<div id="user_eval">
 									<u><b>Evaluateur:</b></u><br>
 									<% User us = new User();
