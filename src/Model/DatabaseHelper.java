@@ -16,6 +16,16 @@ public class DatabaseHelper {
 	private String id;
 	private String mdp;
 	private Connection connexion = null;
+	
+	
+	public Connection getConnexion() {
+		return connexion;
+	}
+
+	public void setConnexion(Connection connexion) {
+		this.connexion = connexion;
+	}
+
 	/*
 	 * constructeur
 	 */
@@ -200,5 +210,17 @@ public class DatabaseHelper {
 			System.err.println("Erreur dans QueryLogin");
 		}
 		return rs;
+	}
+	
+	public void executePreparedStatement(PreparedStatement stm){
+		this.ConnectionOpen();
+		
+		try {
+			stm.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			this.ConnectionClose();
+		}
 	}
 }

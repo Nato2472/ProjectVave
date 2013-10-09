@@ -49,12 +49,8 @@ public class EvalManager {
 	}
 	
 	public void AddEval(Evaluation e){
-		// Prepared Statement obligatoire donc (malheureusement) objet Evaluation
-		// envoyé dans DatabaseManager
-		boolean verif = false;
-		
 		DatabaseHelper db = new DatabaseHelper();
-		verif = db.UpdateEval(e);
+		db.UpdateEval(e);
 		db.ConnectionClose();
 		}
 	
@@ -180,5 +176,12 @@ public class EvalManager {
 		}finally{
 			db.ConnectionClose();
 		}
+	}
+	public void ModifyCateForEta(double  idEta, int idCate){
+		String query = "UPDATE EVALUATION SET Id_Cate = " + idCate + " WHERE Id_Eta =" + idEta;
+		
+		DatabaseHelper db = new DatabaseHelper();
+		db.executeUpdate(query);
+		db.ConnectionClose();
 	}
 }

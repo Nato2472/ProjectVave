@@ -1,12 +1,10 @@
 package Manager;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.sun.org.apache.bcel.internal.generic.LMUL;
-
-import Model.Categorie;
 import Model.DatabaseHelper;
 import Model.Lieu;
 
@@ -26,21 +24,52 @@ public class LieuManager {
 	}
 	
 	public void AddLieu(Lieu l){
-		String query = "INSERT INTO ETABLISSEMENT (Nom_Eta,Adr_Eta,CP_Eta,Ville_Eta,Num_Tel_Eta,Id_Cate)"
-				+" VALUES ('" + l.getNom() + "','"  + l.getAdresse() + "','" + l.getCodepostal() + "','" + l.getVille() + "','" + l.getTelephone() + "','"
-				+ l.getId_cate() + "')";
+		DatabaseHelper db = new DatabaseHelper();
 		
-		DatabaseHelper db = new DatabaseHelper();
-		db.executeUpdate(query);
-		db.ConnectionClose();
-	}
+		PreparedStatement pstmt= null;
+		db.ConnectionOpen();
+		try {
+			pstmt = db.getConnexion().prepareStatement("INSERT INTO ETABLISSEMENT (Nom_Eta,Adr_Eta,CP_Eta,Ville_Eta,Num_Tel_Eta,Id_Cate) VALUES ( ?,?,?,?,?,?)");
+			pstmt.setString(1, l.getNom());
+			pstmt.setString(2, l.getAdresse());
+			pstmt.setInt(3, l.getCodepostal());
+			pstmt.setString(4, l.getVille());
+			pstmt.setString(5, l.getTelephone());
+			pstmt.setInt(6, l.getId_cate());
+			
+			db.executePreparedStatement(pstmt);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.ConnectionClose();
+		}
+	}		
 	public void ModifyLieu(Lieu l){
-		String query = "UPDATE ETABLISSEMENT SET Nom_Eta = '" + l.getNom() + "', Adr_Eta = '" + l.getAdresse()
-				+ "',CP_Eta = '" + l.getCodepostal() + "',Ville_Eta = '" + l.getVille() + "',Num_Tel_Eta = '" 
-				+ l.getTelephone() +"',Id_Cate = " + l.getId_cate() + " WHERE Id_Eta =" + l.getId();
 		DatabaseHelper db = new DatabaseHelper();
-		db.executeUpdate(query);
-		db.ConnectionClose();
+		EvalManager emana = new EvalManager();
+		
+		PreparedStatement pstmt= null;
+		db.ConnectionOpen();
+		try {
+			pstmt = db.getConnexion().prepareStatement("UPDATE ETABLISSEMENT SET Nom_Eta =?, Adr_Eta =?,CP_Eta =?,Ville_Eta =?,Num_Tel_Eta =?,Id_Cate =? WHERE Id_Eta =?");
+			pstmt.setString(1, l.getNom());
+			pstmt.setString(2, l.getAdresse());
+			pstmt.setInt(3, l.getCodepostal());
+			pstmt.setString(4, l.getVille());
+			pstmt.setString(5, l.getTelephone());
+			pstmt.setInt(6, l.getId_cate());
+			pstmt.setDouble(7, l.getId());
+			
+			db.executePreparedStatement(pstmt);
+
+			emana.ModifyCateForEta(l.getId(), l.getId_cate());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.ConnectionClose();
+		}		
 	}	
 	public void DelLieu(Lieu l){
 		String query = "DELETE FROM ETABLISSEMENT WHERE Id_Eta = " + l.getId();
@@ -70,7 +99,6 @@ public class LieuManager {
 				this.lieux.add(l);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
 			db.ConnectionClose();
@@ -95,7 +123,6 @@ public class LieuManager {
 				l.setNom(rs.getString(7));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
 			db.ConnectionClose();

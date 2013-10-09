@@ -96,35 +96,38 @@
 						<% emanager.GetListEvalByCate(cate);%> 
 							<h1>Liste des Evaluations</h1><a href="Categorie.jsp?listcate=aff"><i>Afficher toutes les catégories.</i></a>
 								<% if(session.getAttribute("login") != null){ %>
-								<button id="add_eval" onclick="self.location.href='AddEval.jsp'">Ajouter une évaluation</button></br><%} %><hr> <%
+								<button id="add_eval" onclick="self.location.href='AddEval.jsp'">Ajouter une évaluation</button><br><%} %><hr> <%
 							for(Evaluation e : emanager.getEvalcate()){
 								eta = lmanager.GetLieuById(e.getId_eta());%>
 							<div id="eval">
 								<div id="eta">
-									<u><b>Etablissement:</b></u></br>
-									<%= eta.getNom() %></br> <%= eta.getAdresse() %></br> <%= eta.getCodepostal() %> <%= eta.getVille() %> </br>
-									<u>Tel:</u> <%= eta.getTelephone() %> </br></br>
+									<u><b>Etablissement:</b></u><br>
+									<%= eta.getNom() %><br> <%= eta.getAdresse() %><br> <%= eta.getCodepostal() %> <%= eta.getVille() %> <br>
+									<u>Tel:</u> <%= eta.getTelephone() %> <br>
+									<button TARGET=popup onclick="window.open('MapBing.jsp?adr=<%= eta.getAdresse() %> <%= eta.getCodepostal() %> <%= eta.getVille() %>','popup','width=420,height=430,left=0,top=0,scrollbars=1')">Voir la carte</button>
+									 <br><br>
 								</div>
 								<div id="user_eval">
 									<u><b>Evaluateur:</b></u><br>
-									<% User u = new User();
+									<% User us = new User();
 										UserManager umanager = new UserManager();
-										u = umanager.GetUserById(e.getId_uti());%>
-										<%= u.getPseudo() %><br>
-										<%= u.getDate() %>
+										us = umanager.GetUserById(e.getId_uti());%>
+										<%= us.getPseudo() %><br>
+										<%= us.getDate() %>
 								</div>
 								<div id="carac_eval">
 									<u><b>Evaluation:</b></u>
-									</br>
+									<br>
 									<u>Titre:</u> <%= e.getNom() %>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Note:<%= e.getNote() %>/5   &nbsp;&nbsp;&nbsp; <%= e.getDateEval() %>
-									</br>
-									<u>Objet:</u> <%= e.getComCourt() %></br>
-									<u>Commentaire:</u></br>
-									<%= e.getComLong() %></br>
+									<br>
+									<u>Objet:</u> <%= e.getComCourt() %><br>
+									<u>Commentaire:</u><br>
+									<%= e.getComLong() %><br>
+									<u>Autre:</u><br>
+									<%= e.getAutreEva() %><br>
 								</div>
-								<!--  <iframe src="MapBing.html" width="410px" height="420px"/>  -->
- 							</div>
- 							</br></br>
+							</div>
+ 							<br><br>
 						<% } %>
 					<%} %>
 				</section>

@@ -82,7 +82,7 @@
 			                <input type="text" name="Tel" id="Tel" required="true">
 			                <br><br>
 			                <label id="textlieu" for="Cate">Catégorie:</label>
-			                <select nom="Cate" id="Cate" required="true" >
+			                <select name="Cate" id="Cate" required="true" >
 			                <% for(Categorie c : cmanager.getCategories()){%>
 			                	<option value="<%= c.getNom() %>" selected="selected"><%= c.getNom() %></option>
 			                <% } %>

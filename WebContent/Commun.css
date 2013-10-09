@@ -1,11 +1,7 @@
 @CHARSET "ISO-8859-1";
 
 @media all and (max-device-width: 1024px)
-{
-	a{
-	
-	}
-	
+{	
 	#button_menu_left{
 		border:solid;
 		border-style: solid;
@@ -162,15 +158,12 @@
 a { /* Les liens qui ne sont pas sous le curseur. */
 	color: #000000;
 	text-decoration:none;
-	font-family:Arial,Verdana;
 }
 a:hoover { /* Les liens lorsque le curseur est dessus. */
 	color: #000000;
 	text-decoration:none;
-	font-family:Arial,Verdana;
 }
 a:visited { /* Les liens visités. */
 	color: #000000;
 	text-decoration:none;
-	font-family:Arial,Verdana;
 }

@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import sun.security.jca.GetInstance.Instance;
 import Manager.CategorieManager;
 import Manager.LieuManager;
 import Model.Lieu;
@@ -46,6 +45,9 @@ public class AddLieu extends HttpServlet {
 		Lieu l = new Lieu();
 		boolean valid = true;
 		int i = cmanager.GetCateIdByNom(request.getParameter("Cate"));
+		
+		l.setNom((String) request.getParameter("NomLieu"));
+		l.setAdresse((String) request.getParameter("Adr"));
 	
 		l.setNom((String) request.getParameter("NomLieu"));
 		l.setAdresse((String) request.getParameter("Adr"));
@@ -58,6 +60,7 @@ public class AddLieu extends HttpServlet {
 		l.setId_cate(i);
 		l.setTelephone((String) request.getParameter("Tel"));
 		l.setVille((String) request.getParameter("Ville"));
+		
 		
 		if ( lmanager.GetFree(l) & valid){
 			lmanager.AddLieu(l);

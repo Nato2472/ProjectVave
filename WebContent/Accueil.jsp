@@ -81,17 +81,19 @@
 						<% emanager.GetEvalLast();%>
 						<h1>Dernières Evaluations</h1>
 						<% if(session.getAttribute("login") != null){ %>
-						<button id="add_eval" onclick="self.location.href='AddEval.jsp'">Ajouter une évaluation</button></br>
+						<button id="add_eval" onclick="self.location.href='AddEval.jsp'">Ajouter une évaluation</button><br>
 						<% } %>
 						<hr>	
 						<% for(Evaluation e : emanager.getEvallast()){
 							eta = lmanager.GetLieuById(e.getId_eta());%>
 							<div id="eval">
 								<div id="eta">
-									<u><b>Etablissement:</b></u></br>
-									<%= eta.getNom() %></br> <%= eta.getAdresse() %></br> <%= eta.getCodepostal() %> <%= eta.getVille() %> </br>
-									<u>Tel:</u> <%= eta.getTelephone() %> </br></br>
-								</div><button TARGET=popup onclick="window.open('MapBing.jsp?adr=<%= eta.getAdresse() %> <%= eta.getCodepostal() %> <%= eta.getVille() %>','popup','width=420,height=430,left=0,top=0,scrollbars=1')">Voir la carte</button>
+									<u><b>Etablissement:</b></u><br>
+									<%= eta.getNom() %><br> <%= eta.getAdresse() %><br> <%= eta.getCodepostal() %> <%= eta.getVille() %> <br>
+									<u>Tel:</u> <%= eta.getTelephone() %> <br>
+									<button TARGET=popup onclick="window.open('MapBing.jsp?adr=<%= eta.getAdresse() %> <%= eta.getCodepostal() %> <%= eta.getVille() %>','popup','width=420,height=430,left=0,top=0,scrollbars=1')">Voir la carte</button>
+									 <br><br>
+								</div>
 								<div id="user_eval">
 									<u><b>Evaluateur:</b></u><br>
 									<% User us = new User();
@@ -102,15 +104,18 @@
 								</div>
 								<div id="carac_eval">
 									<u><b>Evaluation:</b></u>
-									</br>
-									<u>Titre:</u> <%= e.getNom() %>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Note:<%= e.getNote() %>/5   &nbsp;&nbsp;&nbsp; <%= e.getDateEval() %>
-									</br>
-									<u>Objet:</u> <%= e.getComCourt() %></br>
-									<u>Commentaire:</u></br>
-									<%= e.getComLong() %></br>
+									<br>
+									<u>Titre:</u> <%= e.getNom() %><br>
+									Note:<%= e.getNote() %>/5   &nbsp;&nbsp;&nbsp; Dte: <%= e.getDateEval() %>
+									<br>
+									<u>Objet:</u> <%= e.getComCourt() %><br>
+									<u>Commentaire:</u><br>
+									<%= e.getComLong() %><br>
+									<u>Autre:</u><br>
+									<%= e.getAutreEva() %><br>
 								</div>
 							</div>
-							</br></br>
+							<br><br>
 						<% } %>
 				</section>
 			</div>		

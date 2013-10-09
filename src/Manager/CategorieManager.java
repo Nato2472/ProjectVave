@@ -1,12 +1,12 @@
 package Manager;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Model.Categorie;
 import Model.DatabaseHelper;
-import Model.Lieu;
 
 public class CategorieManager {
 
@@ -23,19 +23,42 @@ public class CategorieManager {
 		this.categories = new ArrayList<Categorie>();
 	}
 	
-	public void AddCate(Categorie c){
-		String query = "INSERT INTO CATEGORIE (Nom_Cate, Descrip_Cate)"
-				+" VALUES ('" + c.getNom() + "','" + c.getDescription() + "')";
-		
+	public void AddCate(Categorie c){		
 		DatabaseHelper db = new DatabaseHelper();
-		db.executeUpdate(query);
-		db.ConnectionClose();
+		
+		PreparedStatement pstmt= null;
+		db.ConnectionOpen();
+		try {
+			pstmt = db.getConnexion().prepareStatement("INSERT INTO CATEGORIE (Nom_Cate,Descrip_Cate) VALUES ( ?,?)");
+			pstmt.setString(1, c.getNom());
+			pstmt.setString(2, c.getDescription());
+			
+			db.executePreparedStatement(pstmt);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.ConnectionClose();
+		}
 	}
 	public void ModifyCate(Categorie c){
-		String query = "UPDATE CATEGORIE SET Nom_Cate = '" + c.getNom() + "', Descrip_Cate= '" + c.getDescription() + "' WHERE Id_Cate = " + c.getId();
 		DatabaseHelper db = new DatabaseHelper();
-		db.executeUpdate(query);
-		db.ConnectionClose();
+
+		PreparedStatement pstmt= null;
+		db.ConnectionOpen();
+		try {
+			pstmt = db.getConnexion().prepareStatement("UPDATE CATEGORIE SET Nom_Cate =?, Descrip_Cate=? WHERE Id_Cate =?");
+			pstmt.setString(1, c.getNom());
+			pstmt.setString(2, c.getDescription());
+			pstmt.setInt(3, c.getId());
+			
+			db.executePreparedStatement(pstmt);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.ConnectionClose();
+		}
 	}
 	public void DelCate(Categorie c){
 		String query = "DELETE FROM CATEGORIE WHERE Id_Cate = " + c.getId();
