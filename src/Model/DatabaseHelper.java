@@ -22,6 +22,7 @@ public class DatabaseHelper {
 	public DatabaseHelper() {
 		super();
 		url = "jdbc:jtds:sqlserver://217.128.202.143:1433/Vave";
+		// url = "jdbc:jtds:sqlserver://localhost:1433/Vave";
 		id = "sa";
 		mdp = "Mobile2013";
 	}

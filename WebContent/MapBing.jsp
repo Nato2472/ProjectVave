@@ -1,10 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
   <head>
-  <title>Bing Map test</title>
+  <title>Bing Map</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
   <script type="text/javascript">
+  <%
+  String adresse = request.getParameter("adr");
+  %>
+  
   var map = null;
   var searchManager = null;
   function getMap()
@@ -24,7 +28,7 @@
   function geocodeRequest() 
   { 
     createSearchManager();
-    var where = 'france'; 
+    var where = '<%=adresse%>'; 
     var userData = { name: 'Maps Test User', id: 'XYZ' }; 
     var request = 
     { 

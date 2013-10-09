@@ -84,7 +84,7 @@
 			                <label id="textlieu" for="Cate">Catégorie:</label>
 			                <select nom="Cate" id="Cate" required="true" >
 			                <% for(Categorie c : cmanager.getCategories()){%>
-			                	<option value="<%= c.getNom() %>"><%= c.getNom() %></option>
+			                	<option value="<%= c.getNom() %>" selected="selected"><%= c.getNom() %></option>
 			                <% } %>
 			                </select>
 			                <br><br>
@@ -116,9 +116,9 @@
 			                <select name="Cate" id="Cate" required="true" >
 			                <% for(Categorie c : cmanager.getCategories()){
 			                		if ( c.getId() == l.getId_cate()){%>
-			                			<option value="<%= c.getNom() %>" selected="selected"><%= c.getNom() %></option>
+			                			<option value="<%=c.getNom() %>" selected="selected"><%= c.getNom() %></option>
 			                		<% } else { %>
-			                			<option value="<%= c.getNom() %>"><%= c.getNom() %></option>
+			                			<option value="<%=c.getNom() %>"><%= c.getNom() %></option>
 			                		<% } %>
 			                <% } %>
 			                </select>
