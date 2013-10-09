@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.Session;
-
 import Manager.CategorieManager;
 import Model.Categorie;
 
@@ -40,7 +38,7 @@ public class Modify extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		Categorie c = new Categorie();
 		CategorieManager cmanager = new CategorieManager();
 		HttpSession session = request.getSession();

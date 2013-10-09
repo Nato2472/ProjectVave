@@ -3,7 +3,6 @@ package Manager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import Model.DatabaseHelper;
 import Model.User;
 
@@ -31,6 +30,7 @@ public class UserManager {
 		db.executeUpdate(query);
 		db.ConnectionClose();
 	}
+	
 	public void DelUser(User u){
 		String query = "DELETE FROM UTILISATEUR WHERE Id_Uti = " + u.getId();
 		
@@ -38,6 +38,7 @@ public class UserManager {
 		db.executeUpdate(query);
 		db.ConnectionClose();
 	}	
+	
 	public void GetListeUser(){
 		String query = "SELECT  Id_Uti,Login_Uti, Prenom_Uti, Nom_Uti, Pseudo_Uti, Mdp_Uti, Date_Inscrip_Uti FROM UTILISATEUR";
 		ResultSet rs = null;
@@ -58,12 +59,12 @@ public class UserManager {
 				this.users.add(u);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
 			db.ConnectionClose();
 		}
 	}
+	
 	public User GetUserById(double id){
 		String query = "SELECT  Id_Uti,Login_Uti, Prenom_Uti, Nom_Uti, Pseudo_Uti, Mdp_Uti, Date_Inscrip_Uti FROM UTILISATEUR WHERE Id_Uti =" + id;
 		ResultSet rs = null;
@@ -83,7 +84,6 @@ public class UserManager {
 				
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
 			db.ConnectionClose();

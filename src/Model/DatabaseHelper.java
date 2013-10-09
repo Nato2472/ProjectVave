@@ -21,8 +21,8 @@ public class DatabaseHelper {
 	 */
 	public DatabaseHelper() {
 		super();
-		url = "jdbc:jtds:sqlserver://217.128.202.143:1433/Vave";
-		// url = "jdbc:jtds:sqlserver://localhost:1433/Vave";
+		// url = "jdbc:jtds:sqlserver://217.128.202.143:1433/Vave";
+		url = "jdbc:jtds:sqlserver://localhost:1433/Vave";
 		id = "sa";
 		mdp = "Mobile2013";
 	}
@@ -104,7 +104,7 @@ public class DatabaseHelper {
 	}
 	
 	/**
-	 * Update avec Prepared Statement pour Evaluation
+	 * Update avec Prepared Statement pour "Evaluation"
 	 */
 	public boolean UpdateEval(Evaluation ev){
 		this.ConnectionOpen();
@@ -130,13 +130,16 @@ public class DatabaseHelper {
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.err.println("Erreur dans UpdateEval");
+			System.err.println("Erreur dans UpdateEval()");
 			return false;
 		} finally{
 			this.ConnectionClose();
 		}
 	}
 	
+	/**
+	 * Exécute un PreparedStatement avec ResultSet pour "Auth.java"
+	 */
 	public ResultSet QueryLogin(String login, String password){
 		this.ConnectionOpen();
 		PreparedStatement pstmt = null;
@@ -156,6 +159,9 @@ public class DatabaseHelper {
 		return rs;
 	}
 	
+	/**
+	 * Exécute une PreparedStatement avec ResultSet pour "RegisterCheck.java"
+	 */
 	public ResultSet CheckIfExistLogin(String login, String pseudo){
 		this.ConnectionOpen();
 		PreparedStatement pstmt = null;
@@ -171,11 +177,15 @@ public class DatabaseHelper {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.err.println("Erreur dans QueryLogin");
+			System.err.println("Erreur dans CheckIfExistLogin()");
 		}
 		return rs;
 	}
 	
+	
+	/**
+	 * Exécute une PreparedStatement avec ResultSet pour "QueryRegister.java"
+	 */
 	public ResultSet QueryRegister(String login, String firstname, String lastname,String pseudo, String pass1){
 		this.ConnectionOpen();
 		PreparedStatement pstmt = null;
@@ -188,6 +198,7 @@ public class DatabaseHelper {
 			pstmt.setObject(3, lastname);
 			pstmt.setObject(4, pseudo);
 			pstmt.setObject(5, pass1);
+			
 			// Creation de la date actuelle, et conversion pour la mettre dans la BDD
 			java.util.Date now = new java.util.Date();
 			java.sql.Date NOW = new java.sql.Date(now.getTime());
@@ -197,7 +208,7 @@ public class DatabaseHelper {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.err.println("Erreur dans QueryLogin");
+			System.err.println("Erreur dans QueryRegister");
 		}
 		return rs;
 	}

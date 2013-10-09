@@ -13,8 +13,6 @@
 <%@page import="Manager.UserManager" %>
 
 <%
-	// serveur IP: 217.128.202.143
-	// keloud@osys.fr
 	CategorieManager cmanager = new CategorieManager();
 	EvalManager emanager = new EvalManager();
 	Categorie cate = new Categorie();

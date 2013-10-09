@@ -74,7 +74,6 @@ public class User {
 	/*
 	 * Constructeur
 	 */
-
 	public User(String nom, String prenom, String login, String pseudo, Date date, Double idUser) {
 		super();
 		this.nom = nom;
@@ -88,8 +87,4 @@ public class User {
 	public User() {
 		super();
 	}
-
-	/*
-	 * Methode
-	 */
 }

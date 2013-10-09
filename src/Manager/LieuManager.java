@@ -34,6 +34,7 @@ public class LieuManager {
 		db.executeUpdate(query);
 		db.ConnectionClose();
 	}
+	
 	public void ModifyLieu(Lieu l){
 		String query = "UPDATE ETABLISSEMENT SET Nom_Eta = '" + l.getNom() + "', Adr_Eta = '" + l.getAdresse()
 				+ "',CP_Eta = '" + l.getCodepostal() + "',Ville_Eta = '" + l.getVille() + "',Num_Tel_Eta = '" 
@@ -42,6 +43,7 @@ public class LieuManager {
 		db.executeUpdate(query);
 		db.ConnectionClose();
 	}	
+	
 	public void DelLieu(Lieu l){
 		String query = "DELETE FROM ETABLISSEMENT WHERE Id_Eta = " + l.getId();
 		
@@ -49,6 +51,7 @@ public class LieuManager {
 		db.executeUpdate(query);
 		db.ConnectionClose();
 	}	
+	
 	public void GetListeLieu(){
  		String query = "SELECT Id_Eta,Nom_Eta,Adr_Eta,CP_Eta,Ville_Eta,Num_Tel_Eta,Id_Cate FROM ETABLISSEMENT";
 		ResultSet rs = null;
@@ -102,6 +105,7 @@ public class LieuManager {
 		}
 		return l;
 	}
+	
 	public Lieu GetLieuByNom(String nom){
 		String query = "SELECT Id_Eta,Adr_Eta,CP_Eta,Ville_Eta,Num_Tel_Eta,Id_Cate,Nom_Eta FROM ETABLISSEMENT WHERE Nom_Eta = '" + nom + "'";
 		ResultSet rs = null;
@@ -127,6 +131,7 @@ public class LieuManager {
 		}
 		return l;
 	}
+	
 	public boolean GetFree(Lieu l){
 		boolean valid = false;
 		this.GetListeLieu();
